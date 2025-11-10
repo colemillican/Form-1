@@ -3,7 +3,6 @@
 import React from "react";
 import {
   ArrowRight,
-  BadgeCheck,
   Bolt,
   Check,
   Globe,
@@ -17,7 +16,7 @@ import MobileNav from "./components/MobileNav";
 /* ---------------------------------- Brand --------------------------------- */
 const BRAND = "LocalLink Digital";
 
-// Inline logo (gradient mark) for dark header/footer
+// Inline logo (gradient mark)
 function LogoInline({ size = 28 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label={`${BRAND} logo`}>
@@ -34,27 +33,22 @@ function LogoInline({ size = 28 }: { size?: number }) {
   );
 }
 
-// gradient text helper
+// Gradient helper
 const G = ({ children }: { children: React.ReactNode }) => (
   <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
     {children}
   </span>
 );
 
-// quick visual helpers
 const heroImg =
-  "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1920&auto=format&fit=crop"; // space/planet vibe
-const panel =
-  "https://images.unsplash.com/photo-1520975922284-9b9a45d43f9a?q=80&w=1200&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1920&auto=format&fit=crop";
 
-/* ---------------------------------- Page ---------------------------------- */
 export default function Page() {
   return (
     <div className="min-h-screen bg-black text-zinc-100 antialiased">
-      {/* Mobile (already styled). */}
       <MobileNav />
 
-      {/* Desktop NAV — dark, minimal */}
+      {/* Desktop Nav */}
       <header className="hidden sm:block sticky top-0 z-[200] border-b border-white/10 bg-black/70 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-8">
           <a href="/" className="group flex items-center gap-3">
@@ -63,7 +57,9 @@ export default function Page() {
               <span className="text-[17px] font-extrabold tracking-tight leading-none">
                 <G>LocalLink</G>
               </span>
-              <span className="text-[14px] font-semibold text-zinc-400 leading-none">Digital</span>
+              <span className="text-[14px] font-semibold text-zinc-400 leading-none">
+                Digital
+              </span>
             </span>
           </a>
 
@@ -82,63 +78,70 @@ export default function Page() {
         </div>
       </header>
 
-      <main className="pt-16 sm:pt-0">
-        {/* ============================== HERO ============================== */}
-        <section
-          className="relative isolate flex min-h-[86vh] items-end overflow-hidden"
-          style={{
-            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.30), rgba(0,0,0,0.65)), url(${heroImg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          {/* ambient glow */}
-          <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
+      {/* ============================== HERO ============================== */}
+      <section
+        className="relative isolate flex min-h-[86vh] items-end overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.30), rgba(0,0,0,0.65)), url(${heroImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
 
-          <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
-            <div className="max-w-2xl">
-              <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400">LOCAL SITES // GLOBAL STANDARDS</p>
-              <h1 className="text-[clamp(36px,6vw,64px)] font-black leading-[1.05] tracking-tight">
-                BUILDING <G>MODERN</G> WEBSITES
-                <br />
-                THAT <G>FEEL FUTURE-READY</G>.
-              </h1>
-              <p className="mt-4 max-w-xl text-zinc-300">
-                Clean, cinematic design. Lightning performance. Mobile-first. We craft sites that look like the future—
-                and convert like crazy.
-              </p>
+        <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
+          <div className="max-w-2xl">
+            <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400">
+              LOCAL SITES // GLOBAL STANDARDS
+            </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="#contact"
-                  className="inline-flex h-12 items-center justify-center rounded-full bg-white text-black px-6 text-[15px] font-semibold hover:bg-zinc-200 transition"
-                >
-                  Get a Free Preview
-                </a>
-                <a
-                  href="#work"
-                  className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-[15px] font-semibold text-white hover:bg-white/10 transition"
-                >
-                  See our work <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </div>
+            {/* New Headline */}
+            <h1 className="text-[clamp(36px,6vw,64px)] font-black leading-[1.05] tracking-tight">
+              <G>Empowering</G> small businesses
+              <br />
+              through <G>modern technology</G>.
+            </h1>
 
-              {/* key signals */}
-              <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-300 sm:flex">
-                <span className="inline-flex items-center gap-2">
-                  <Bolt className="h-4 w-4 text-emerald-400" /> Built fast
-                </span>
-                <span className="inline-flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-emerald-400" /> Fully managed
-                </span>
-                <span className="inline-flex items-center gap-2">
-                  <Smartphone className="h-4 w-4 text-emerald-400" /> Mobile-first
-                </span>
-              </div>
+            {/* New Subheadline */}
+            <p className="mt-4 max-w-xl text-zinc-300">
+              LocalLink Digital turns your local business into a digital powerhouse — building,
+              maintaining, and optimizing a high-performance website that helps you attract
+              customers, stay visible, and grow in the modern market.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#contact"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-white text-black px-6 text-[15px] font-semibold hover:bg-zinc-200 transition"
+              >
+                Get a Free Preview
+              </a>
+              <a
+                href="#work"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-[15px] font-semibold text-white hover:bg-white/10 transition"
+              >
+                See our work <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </div>
+
+            <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-300 sm:flex">
+              <span className="inline-flex items-center gap-2">
+                <Bolt className="h-4 w-4 text-emerald-400" /> Built fast
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-emerald-400" /> Fully managed
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <Smartphone className="h-4 w-4 text-emerald-400" /> Mobile-first
+              </span>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
+    </div>
+  );
+}
 
         {/* ============================ FEATURE STRIP ============================ */}
         <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
