@@ -101,7 +101,7 @@ export default function Page() {
 
               {/* NEW HEADLINE with gradient accents */}
               <h1 className="text-[clamp(36px,6vw,64px)] font-black leading-[1.05] tracking-tight">
-                <G>Empowering</G> small businesses
+                <G>Empowering</G> local businesses
                 <br />
                 through <G>modern technology</G>.
               </h1>
