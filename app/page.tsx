@@ -99,14 +99,15 @@ export default function Page() {
           <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
             <div className="max-w-2xl">
               <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400">LOCAL SITES // GLOBAL STANDARDS</p>
+
+              {/* NEW HEADLINE */}
               <h1 className="text-[clamp(36px,6vw,64px)] font-black leading-[1.05] tracking-tight">
-                BUILDING <G>MODERN</G> WEBSITES
-                <br />
-                THAT <G>FEEL FUTURE-READY</G>.
+                Bridging the gap between small business and big technology.
               </h1>
+
+              {/* NEW SUBHEADING */}
               <p className="mt-4 max-w-xl text-zinc-300">
-                Clean, cinematic design. Lightning performance. Mobile-first. We craft sites that look like the future—
-                and convert like crazy.
+                LocalLink Digital turns your local business into a digital powerhouse — building, maintaining, and optimizing a high-performance website that helps you attract customers, stay visible, and compete with corporate giants.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
