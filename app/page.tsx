@@ -10,6 +10,15 @@ import {
   Search,
   ShieldCheck,
   Smartphone,
+  PenTool,
+  Repeat,
+  Rocket,
+  HelpCircle,
+  Mail,
+  Phone,
+  MapPin,
+  DollarSign,
+  Clock,
 } from "lucide-react";
 import MobileNav from "./components/MobileNav";
 
@@ -75,8 +84,11 @@ export default function Page() {
 
           <nav className="hidden items-center gap-10 text-[13.5px] sm:flex">
             <a href="#services" className="text-zinc-300 hover:text-white transition">SERVICES</a>
-            <a href="#work" className="text-zinc-300 hover:text-white transition">WORK</a>
+            {/* Repurpose WORK link to Services (no portfolio yet) */}
+            <a href="#services" className="text-zinc-300 hover:text-white transition">WORK</a>
             <a href="#process" className="text-zinc-300 hover:text-white transition">PROCESS</a>
+            <a href="#pricing" className="text-zinc-300 hover:text-white transition">PRICING</a>
+            <a href="#faq" className="text-zinc-300 hover:text-white transition">FAQ</a>
             <a href="#contact" className="text-zinc-300 hover:text-white transition">CONTACT</a>
             <a
               href="#contact"
@@ -130,10 +142,10 @@ export default function Page() {
                   Get a Free Preview
                 </a>
                 <a
-                  href="#work"
+                  href="#services"
                   className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-[15px] font-semibold text-white hover:bg-white/10 transition"
                 >
-                  See our work <ArrowRight className="ml-2 h-4 w-4" />
+                  See how we help <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </div>
 
@@ -154,7 +166,7 @@ export default function Page() {
         </section>
 
         {/* ============================ FEATURE STRIP ============================ */}
-        <section id="services" className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
+        <section id="highlights" className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
           <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 gap-4 px-6 py-10 sm:grid-cols-3 sm:px-8">
             <Feature
               icon={<Monitor className="h-5 w-5 text-emerald-400" />}
@@ -174,59 +186,48 @@ export default function Page() {
           </div>
         </section>
 
-        {/* =============================== WORK =============================== */}
-        <section id="work" className="bg-zinc-950">
+        {/* =============================== SERVICES =============================== */}
+        <section id="services" className="bg-zinc-950">
           <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
             <div className="mb-6 flex items-end justify-between">
-              <h3 className="text-2xl font-semibold tracking-tight">Recent Launches</h3>
+              <h3 className="text-2xl font-semibold tracking-tight">What we do</h3>
               <a
                 href="#contact"
                 className="hidden sm:inline-flex items-center text-sm font-semibold text-zinc-300 hover:text-white"
               >
-                Request a preview <ArrowRight className="ml-1 h-4 w-4" />
+                Start your project <ArrowRight className="ml-1 h-4 w-4" />
               </a>
             </div>
 
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 {
-                  tag: "HOME SERVICES",
-                  title: "Precision HVAC",
-                  img: panel,
-                  blurb: "High-contrast landing + sticky call CTA.",
+                  icon: <Monitor className="h-5 w-5 text-emerald-400" />,
+                  title: "Website Design & Build",
+                  blurb: "Fast, mobile-first sites that look legit and convert visitors.",
                 },
                 {
-                  tag: "FITNESS",
-                  title: "IronForge Gym",
-                  img: panel,
-                  blurb: "Hero video, class schedule, simple join flow.",
+                  icon: <Search className="h-5 w-5 text-emerald-400" />,
+                  title: "Google Business & SEO Basics",
+                  blurb: "Claim, clean up, and optimize so customers can actually find you.",
                 },
                 {
-                  tag: "AUTO DETAIL",
-                  title: "Ceramic Pro Studio",
-                  img: panel,
-                  blurb: "Glossy visuals, package matrix, lead form.",
+                  icon: <Smartphone className="h-5 w-5 text-emerald-400" />,
+                  title: "Branding & Copy Polish",
+                  blurb: "Logos, colors, and clear messaging that match your market.",
+                },
+                {
+                  icon: <Repeat className="h-5 w-5 text-emerald-400" />,
+                  title: "Monthly Site Care",
+                  blurb: "Updates, security, and tweaks handled for you — stay focused.",
                 },
               ].map((c, i) => (
-                <article
-                  key={i}
-                  className="group overflow-hidden rounded-2xl border border-white/10 bg-black"
-                >
-                  <div className="relative">
-                    <img
-                      alt={`${c.title} preview`}
-                      src={c.img}
-                      className="aspect-[4/3] w-full object-cover opacity-90 transition group-hover:opacity-100"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+                <article key={i} className="rounded-2xl border border-white/10 bg-white/5 p-6">
+                  <div className="mb-3 inline-flex items-center gap-2">
+                    {c.icon}
+                    <span className="text-[15px] font-semibold">{c.title}</span>
                   </div>
-                  <div className="p-5">
-                    <span className="inline-block rounded-md border border-white/15 bg-white/5 px-2 py-1 text-[11px] font-medium tracking-wide text-zinc-300">
-                      {c.tag}
-                    </span>
-                    <h4 className="mt-2 text-lg font-semibold">{c.title}</h4>
-                    <p className="mt-1 text-sm text-zinc-400">{c.blurb}</p>
-                  </div>
+                  <p className="text-[14px] leading-6 text-zinc-300">{c.blurb}</p>
                 </article>
               ))}
             </div>
@@ -236,11 +237,178 @@ export default function Page() {
         {/* ============================== PROCESS ============================== */}
         <section id="process" className="border-t border-white/10 bg-black">
           <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
-            <h3 className="text-2xl font-semibold tracking-tight">A lean, three-step build</h3>
-            <div className="mt-6 grid gap-5 sm:grid-cols-3">
-              <Step n={1} title="Discover" text="We capture your goals, brand tone, and target market." />
-              <Step n={2} title="Design" text="Cinematic hero, clean layout, premium typography." />
-              <Step n={3} title="Launch" text="Deployed to Vercel, managed updates, analytics wired." />
+            <h3 className="text-2xl font-semibold tracking-tight">How it works</h3>
+            <p className="mt-2 max-w-2xl text-sm text-zinc-400">
+              A simple, transparent four-step flow from idea to launch — and beyond.
+            </p>
+            <div className="mt-6 grid gap-5 sm:grid-cols-4">
+              <Step n={1} title="Discovery Call" text="We learn your goals, audience, and what a ‘win’ looks like." />
+              <Step n={2} title="Design & Build" text="We design, write copy, and build a fast, responsive site." />
+              <Step n={3} title="Review & Launch" text="You review. We refine. Then we go live and submit to Google." />
+              <Step n={4} title="Ongoing Growth" text="We handle updates, tweaks, and SEO basics as you grow." />
+            </div>
+          </div>
+        </section>
+
+        {/* =============================== ABOUT =============================== */}
+        <section id="about" className="border-t border-white/10 bg-zinc-950">
+          <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
+            <h3 className="text-2xl font-semibold tracking-tight">Why choose us</h3>
+            <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  "Auburn-based team that understands local businesses.",
+                  "Mobile-first, speed-focused builds using modern tech.",
+                  "Clear communication, fast turnaround, and zero fluff.",
+                  "Honest pricing and simple maintenance options.",
+                ].map((pt) => (
+                  <li key={pt} className="flex items-start gap-3 text-[14px] leading-6 text-zinc-300">
+                    <Check className="mt-0.5 h-4 w-4 text-emerald-400" />
+                    <span>{pt}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-sm text-zinc-400">
+                Founded by builders who care about clean design and real-world results. No hype — just dependable execution.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* =============================== PRICING =============================== */}
+        <section id="pricing" className="border-t border-white/10 bg-black">
+          <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
+            <h3 className="text-2xl font-semibold tracking-tight">Simple, transparent pricing</h3>
+            <p className="mt-2 max-w-2xl text-sm text-zinc-400">
+              Pick a starting point. We’ll tailor details to your business and budget.
+            </p>
+
+            <div className="mt-6 grid gap-6 sm:grid-cols-3">
+              {[
+                {
+                  name: "Starter Site",
+                  price: "$499",
+                  desc: "One-page site, mobile-first, contact form.",
+                  features: [
+                    "1 page (expandable later)",
+                    "Modern design & copy polish",
+                    "Basic on-page SEO",
+                    "Google Business guidance",
+                  ],
+                  highlight: false,
+                },
+                {
+                  name: "Business Boost",
+                  price: "$999",
+                  desc: "Multi-page site, services pages, launch support.",
+                  features: [
+                    "Up to 5 pages",
+                    "Conversion-focused layout",
+                    "On-page SEO + indexing",
+                    "Launch & analytics setup",
+                  ],
+                  highlight: true,
+                },
+                {
+                  name: "Full Presence",
+                  price: "$1499",
+                  desc: "Brand kit, site, and growth essentials.",
+                  features: [
+                    "Up to 8 pages",
+                    "Light brand kit & copywriting",
+                    "SEO basics + Google Business",
+                    "3 months of site care",
+                  ],
+                  highlight: false,
+                },
+              ].map((tier) => (
+                <div
+                  key={tier.name}
+                  className={[
+                    "rounded-2xl border p-6 md:p-8 flex flex-col bg-white/5",
+                    tier.highlight ? "border-white/30 shadow-[0_8px_40px_-15px_rgba(0,0,0,0.5)]" : "border-white/10",
+                  ].join(" ")}
+                >
+                  {tier.highlight && (
+                    <span className="self-start rounded-full bg-white/10 text-white text-xs px-3 py-1 mb-4">
+                      Most popular
+                    </span>
+                  )}
+                  <h4 className="text-lg font-semibold">{tier.name}</h4>
+                  <p className="mt-1 text-zinc-300">{tier.desc}</p>
+                  <div className="mt-5 text-4xl font-semibold">{tier.price}</div>
+                  <ul className="mt-5 space-y-2 text-sm">
+                    {tier.features.map((f) => (
+                      <li key={f} className="flex items-start gap-3 text-zinc-300">
+                        <Check className="mt-0.5 h-4 w-4 text-emerald-400" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#contact"
+                    className={[
+                      "mt-6 inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 transition text-sm font-semibold",
+                      tier.highlight
+                        ? "bg-white text-black hover:bg-zinc-200"
+                        : "border border-white/20 text-white hover:bg-white/10",
+                    ].join(" ")}
+                  >
+                    Choose {tier.name} <ArrowRight className="size-4" />
+                  </a>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center gap-6 text-xs text-zinc-400">
+              <span className="inline-flex items-center gap-2">
+                <Clock className="h-4 w-4" /> 2–3 week average build
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <DollarSign className="h-4 w-4" /> Simple, transparent pricing
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================= FAQ ================================= */}
+        <section id="faq" className="border-t border-white/10 bg-zinc-950">
+          <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
+            <h3 className="text-2xl font-semibold tracking-tight">Questions we get a lot</h3>
+            <p className="mt-2 max-w-2xl text-sm text-zinc-400">
+              If you don’t see your question here, reach out — we’ll get you a quick answer.
+            </p>
+
+            <div className="mt-6 mx-auto max-w-3xl space-y-4">
+              {[
+                {
+                  q: "How long does a project take?",
+                  a: "Most small business sites ship in 2–3 weeks once we have content (text, photos, logo). Rush options available.",
+                },
+                {
+                  q: "Can you update my current site instead of rebuilding?",
+                  a: "Yes. If your stack allows it, we can refresh design, content, and performance without a full rebuild.",
+                },
+                {
+                  q: "Do you handle hosting and domains?",
+                  a: "We’ll set up reliable hosting and DNS with you and keep ownership in your name. We prioritize speed and security.",
+                },
+                {
+                  q: "What happens after launch?",
+                  a: "We offer simple care plans for updates, tweaks, and SEO basics so your site stays fresh and effective.",
+                },
+              ].map((item) => (
+                <details
+                  key={item.q}
+                  className="group rounded-xl border border-white/10 bg-white/5 p-5 open:bg-white/10 transition"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between">
+                    <span className="font-medium">{item.q}</span>
+                    <HelpCircle className="size-5 text-zinc-400 group-open:rotate-180 transition" />
+                  </summary>
+                  <p className="mt-3 text-sm text-zinc-300">{item.a}</p>
+                </details>
+              ))}
             </div>
           </div>
         </section>
@@ -267,9 +435,15 @@ export default function Page() {
                   <Check className="h-4 w-4 text-emerald-400" /> Fully managed after launch
                 </li>
               </ul>
+
+              <div className="mt-6 space-y-3 text-sm text-zinc-400">
+                <p className="flex items-center gap-2"><Mail className="h-4 w-4" /> hello@locallink.digital</p>
+                <p className="flex items-center gap-2"><Phone className="h-4 w-4" /> (555) 000-0000</p>
+                <p className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Auburn, Alabama</p>
+              </div>
             </div>
 
-            <form className="max-w-xl space-y-3">
+            <form className="max-w-xl space-y-3" action="#" method="post">
               <input
                 className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
                 placeholder="Business name"
@@ -290,7 +464,7 @@ export default function Page() {
                 placeholder="Phone"
               />
               <textarea
-                className="min-h-[120px] w-full rounded-xl border border-white/15 bg-white/5 p-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
+                className="min-h[120px] w-full rounded-xl border border-white/15 bg-white/5 p-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
                 placeholder="What do you do? What’s the main goal of this site?"
               />
               <button className="h-11 w-full rounded-full bg-white font-semibold text-black hover:bg-zinc-200 transition">
@@ -315,18 +489,12 @@ export default function Page() {
                 </div>
               </div>
               <nav className="flex flex-wrap items-center gap-5 text-sm">
-                <a href="#services" className="text-zinc-300 hover:text-white">
-                  Services
-                </a>
-                <a href="#work" className="text-zinc-300 hover:text-white">
-                  Work
-                </a>
-                <a href="#process" className="text-zinc-300 hover:text-white">
-                  Process
-                </a>
-                <a href="#contact" className="text-zinc-300 hover:text-white">
-                  Contact
-                </a>
+                <a href="#services" className="text-zinc-300 hover:text-white">Services</a>
+                <a href="#process" className="text-zinc-300 hover:text-white">Process</a>
+                <a href="#about" className="text-zinc-300 hover:text-white">About</a>
+                <a href="#pricing" className="text-zinc-300 hover:text-white">Pricing</a>
+                <a href="#faq" className="text-zinc-300 hover:text-white">FAQ</a>
+                <a href="#contact" className="text-zinc-300 hover:text-white">Contact</a>
               </nav>
             </div>
             <div className="mt-6 text-xs text-zinc-500">
@@ -374,6 +542,7 @@ function Step({ n, title, text }: { n: number; title: string; text: string }) {
     </div>
   );
 }
+
 
 
 
