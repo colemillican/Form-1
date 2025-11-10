@@ -3,7 +3,6 @@
 import React from "react";
 import {
   ArrowRight,
-  BadgeCheck,
   Bolt,
   Check,
   Globe,
@@ -17,7 +16,7 @@ import MobileNav from "./components/MobileNav";
 /* ---------------------------------- Brand --------------------------------- */
 const BRAND = "LocalLink Digital";
 
-// Inline logo (gradient mark) for dark header/footer
+// Inline logo (gradient mark)
 function LogoInline({ size = 28 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label={`${BRAND} logo`}>
@@ -34,16 +33,16 @@ function LogoInline({ size = 28 }: { size?: number }) {
   );
 }
 
-// gradient text helper
+// Gradient helper
 const G = ({ children }: { children: React.ReactNode }) => (
   <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
     {children}
   </span>
 );
 
-// quick visual helpers
+// visual helpers
 const heroImg =
-  "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1920&auto=format&fit=crop"; // space/planet vibe
+  "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1920&auto=format&fit=crop";
 const panel =
   "https://images.unsplash.com/photo-1520975922284-9b9a45d43f9a?q=80&w=1200&auto=format&fit=crop";
 
@@ -51,10 +50,10 @@ const panel =
 export default function Page() {
   return (
     <div className="min-h-screen bg-black text-zinc-100 antialiased">
-      {/* Mobile (already styled). */}
+      {/* Mobile nav */}
       <MobileNav />
 
-      {/* Desktop NAV — dark, minimal */}
+      {/* Desktop NAV */}
       <header className="hidden sm:block sticky top-0 z-[200] border-b border-white/10 bg-black/70 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-8">
           <a href="/" className="group flex items-center gap-3">
@@ -92,21 +91,26 @@ export default function Page() {
             backgroundPosition: "center",
           }}
         >
-          {/* ambient glow */}
+          {/* ambient glows */}
           <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
 
           <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
             <div className="max-w-2xl">
               <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400">LOCAL SITES // GLOBAL STANDARDS</p>
+
+              {/* NEW HEADLINE with gradient accents */}
               <h1 className="text-[clamp(36px,6vw,64px)] font-black leading-[1.05] tracking-tight">
-                BUILDING <G>MODERN</G> WEBSITES
+                <G>Empowering</G> small businesses
                 <br />
-                THAT <G>FEEL FUTURE-READY</G>.
+                through <G>modern technology</G>.
               </h1>
+
+              {/* NEW SUBHEADLINE */}
               <p className="mt-4 max-w-xl text-zinc-300">
-                Clean, cinematic design. Lightning performance. Mobile-first. We craft sites that look like the future—
-                and convert like crazy.
+                LocalLink Digital turns your local business into a digital powerhouse — building,
+                maintaining, and optimizing a high-performance website that helps you attract
+                customers, stay visible, and grow in the modern market.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -141,7 +145,7 @@ export default function Page() {
         </section>
 
         {/* ============================ FEATURE STRIP ============================ */}
-        <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
+        <section id="services" className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
           <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 gap-4 px-6 py-10 sm:grid-cols-3 sm:px-8">
             <Feature
               icon={<Monitor className="h-5 w-5 text-emerald-400" />}
@@ -303,5 +307,6 @@ function Step({ n, title, text }: { n: number; title: string; text: string }) {
     </div>
   );
 }
+
 
 
