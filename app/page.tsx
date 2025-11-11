@@ -75,6 +75,7 @@ export default function Page() {
           </Link>
 
           <nav className="hidden items-center gap-10 text-[13.5px] sm:flex">
+            <Link href="/" className="text-zinc-300 hover:text-white transition">HOME</Link>
             <Link href="/services" className="text-zinc-300 hover:text-white transition">SERVICES</Link>
             <Link href="/process" className="text-zinc-300 hover:text-white transition">PROCESS</Link>
             <Link href="/pricing" className="text-zinc-300 hover:text-white transition">PRICING</Link>
@@ -90,8 +91,8 @@ export default function Page() {
         </div>
       </header>
 
+      {/* ============================== HERO ============================== */}
       <main className="pt-16 sm:pt-0">
-        {/* ============================== HERO ============================== */}
         <section
           className="relative isolate flex min-h-[86vh] items-end overflow-hidden"
           style={{
@@ -100,7 +101,6 @@ export default function Page() {
             backgroundPosition: "center",
           }}
         >
-          {/* ambient glows */}
           <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
 
@@ -110,14 +110,12 @@ export default function Page() {
                 LOCAL SITES // GLOBAL STANDARDS
               </p>
 
-              {/* Original Headline */}
               <h1 className="text-[clamp(36px,6vw,64px)] font-black leading-[1.05] tracking-tight">
                 <G>Empowering</G> local businesses
                 <br />
                 through <G>modern technology</G>.
               </h1>
 
-              {/* Subheadline */}
               <p className="mt-4 max-w-xl text-zinc-300">
                 LocalLink Digital turns your local business into a digital powerhouse — building,
                 maintaining, and optimizing a high-performance website that helps you attract
@@ -139,7 +137,6 @@ export default function Page() {
                 </Link>
               </div>
 
-              {/* key signals */}
               <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-300 sm:flex">
                 <span className="inline-flex items-center gap-2">
                   <Bolt className="h-4 w-4 text-emerald-400" /> Built fast
@@ -230,6 +227,7 @@ export default function Page() {
                 </div>
               </div>
               <nav className="flex flex-wrap items-center gap-5 text-sm">
+                <Link href="/" className="text-zinc-300 hover:text-white">Home</Link>
                 <Link href="/services" className="text-zinc-300 hover:text-white">Services</Link>
                 <Link href="/process" className="text-zinc-300 hover:text-white">Process</Link>
                 <Link href="/pricing" className="text-zinc-300 hover:text-white">Pricing</Link>
@@ -267,6 +265,7 @@ function Feature({
     </div>
   );
 }
+
 
 
 
