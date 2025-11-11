@@ -58,24 +58,24 @@ const heroFont = Exo_2({
 /* ----------------------------- Hero Carousel ------------------------------ */
 /** Grand + bright nature only (vast skies, oceans, mountains, aurora; one starscape) */
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=2000&auto=format&fit=crop", // mountain sunrise, expansive valley
-  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop", // bright turquoise ocean cliffs
-  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000&auto=format&fit=crop", // misty forest, wide openness
-  "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000&auto=format&fit=crop", // waterfall canyon, bright greens
-  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop", // expansive coastline, bright horizon
-  "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop", // snowy ridge, endless sky
-  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2000&auto=format&fit=crop", // rolling meadow, big sky
-  "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=2000&auto=format&fit=crop", // starscape (Milky Way), vast night
-  "https://images.unsplash.com/photo-1470770903676-69b98201ea1c?q=80&w=2000&auto=format&fit=crop", // aurora over lake, vivid colors
-  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop", // desert badlands, huge expanse
+  "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=2000&auto=format&fit=crop", // mountain sunrise
+  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop", // turquoise ocean cliffs
+  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop", // expansive coastline
+  "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop", // snowy ridge
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2000&auto=format&fit=crop", // rolling meadow
+  "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=2000&auto=format&fit=crop", // starscape
+  "https://images.unsplash.com/photo-1470770903676-69b98201ea1c?q=80&w=2000&auto=format&fit=crop", // aurora
+  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop", // desert badlands
+  "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000&auto=format&fit=crop", // waterfall canyon
+  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000&auto=format&fit=crop", // forest mist
 ];
 
 function HeroCarousel() {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
+  const [idx, setIdx] = React.useState(0);
+  React.useEffect(() => {
     const id = setInterval(() => {
       setIdx((i) => (i + 1) % HERO_IMAGES.length);
-    }, 10000); // ~10s per slide
+    }, 10000); // ~10s
     return () => clearInterval(id);
   }, []);
 
@@ -88,8 +88,8 @@ function HeroCarousel() {
             i === idx ? "opacity-100" : "opacity-0"
           }`}
           style={{
-            // lighter overlay so images stay bright, but still readable for text
-            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.55)), url(${src})`,
+            // lighter overlay so images stay bright, but still readable
+            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.16), rgba(0,0,0,0.50)), url(${src})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -97,6 +97,40 @@ function HeroCarousel() {
         />
       ))}
     </div>
+  );
+}
+
+/* --------------------------- Subtle Digital Layer -------------------------- */
+/** Ultra-light SVG grid + soft glass glow. Adds "tech" without killing the nature vibe. */
+function DigitalOverlay() {
+  return (
+    <>
+      {/* faint animated grid */}
+      <svg
+        className="pointer-events-none absolute inset-0 -z-0 opacity-[0.12] mix-blend-screen"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        aria-hidden
+      >
+        <defs>
+          <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.2" />
+          </pattern>
+          <linearGradient id="gridFade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="white" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+          </linearGradient>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+        <rect width="100%" height="100%" fill="url(#gridFade)" />
+      </svg>
+
+      {/* soft glass highlight */}
+      <div className="pointer-events-none absolute inset-0 -z-0">
+        <div className="absolute left-1/2 top-[15%] h-[40vh] w-[60vw] -translate-x-1/2 rounded-[50%] bg-white/6 blur-3xl" />
+        <div className="absolute right-[10%] bottom-[10%] h-[28vh] w-[28vh] rounded-full bg-emerald-400/10 blur-3xl" />
+      </div>
+    </>
   );
 }
 
@@ -140,65 +174,83 @@ export default function Page() {
 
       <main className="pt-16 sm:pt-0">
         {/* ============================== HERO (Carousel) ============================== */}
-        <section className="relative isolate flex min-h-[86vh] items-end overflow-hidden">
-          {/* rotating backgrounds */}
-          <HeroCarousel />
+       <section className="relative isolate flex min-h-[86vh] items-end overflow-hidden">
+  {/* rotating backgrounds */}
+  <HeroCarousel />
 
-          {/* ambient glows */}
-          <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
+  {/* subtle digital overlays */}
+  <DigitalOverlay />
 
-          <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
-            <div className="max-w-2xl">
-              <p className="mb-3 text-xs tracking-[0.35em] text-zinc-300">
-                LOCAL SITES // GLOBAL STANDARDS
-              </p>
+  {/* ambient color glows (kept from your style) */}
+  <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
+  <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
 
-              {/* Smaller hero + new font */}
-              <h1
-                className={`${heroFont.className} text-[clamp(26px,4.2vw,44px)] font-bold leading-[1.1] tracking-tight`}
-              >
-                <G>Empowering</G> local businesses
-                <br />
-                through <G>modern technology</G>.
-              </h1>
+  <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
+    <div className="max-w-2xl">
+      <p className="mb-3 text-xs tracking-[0.35em] text-zinc-200">
+        LOCAL SITES // GLOBAL STANDARDS
+      </p>
 
-              <p className="mt-4 max-w-xl text-zinc-200">
-                LocalLink Digital turns your local business into a digital powerhouse — building,
-                maintaining, and optimizing a high-performance website that helps you attract
-                customers, stay visible, and save time.
-              </p>
+      {/* Smaller, sleeker hero headline (uses your existing hero font) */}
+      <h1 className="text-[clamp(26px,4.2vw,44px)] font-bold leading-[1.1] tracking-tight">
+        <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
+          Captivating design.
+        </span>{" "}
+        Precision technology.
+        <br />
+        Websites that feel <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">as expansive as nature</span>.
+      </h1>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="/contact"
-                  className="inline-flex h-12 items-center justify-center rounded-full bg-white text-black px-6 text-[15px] font-semibold hover:bg-zinc-200 transition"
-                >
-                  Get a Free Preview
-                </a>
-                <a
-                  href="/services"
-                  className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-[15px] font-semibold text-white hover:bg-white/10 transition"
-                >
-                  See our services <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </div>
+      {/* Bridge copy: nature ↔ tech */}
+      <p className="mt-4 max-w-xl text-zinc-100/90">
+        We blend the clarity and scale of the natural world with modern web engineering.
+        The result? Fast, resilient, cinematic sites that attract customers and build trust.
+      </p>
 
-              {/* key signals */}
-              <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-200 sm:flex">
-                <span className="inline-flex items-center gap-2">
-                  <Bolt className="h-4 w-4 text-emerald-400" /> Built fast
-                </span>
-                <span className="inline-flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-emerald-400" /> Fully managed
-                </span>
-                <span className="inline-flex items-center gap-2">
-                  <Smartphone className="h-4 w-4 text-emerald-400" /> Mobile-first
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
+      <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+        <a
+          href="/contact"
+          className="inline-flex h-12 items-center justify-center rounded-full bg-white text-black px-6 text-[15px] font-semibold hover:bg-zinc-200 transition"
+        >
+          Get a Free Preview
+        </a>
+        <a
+          href="/services"
+          className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-[15px] font-semibold text-white hover:bg-white/10 transition"
+        >
+          See our services
+          <svg className="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      {/* key signals */}
+      <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-200 sm:flex">
+        <span className="inline-flex items-center gap-2">
+          <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Built fast
+        </span>
+        <span className="inline-flex items-center gap-2">
+          <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          Fully managed
+        </span>
+        <span className="inline-flex items-center gap-2">
+          <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="7" y="2" width="10" height="20" rx="2" />
+            <path d="M11 18h2" />
+          </svg>
+          Mobile-first
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* ============================ FEATURE STRIP ============================ */}
         <section id="services" className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
