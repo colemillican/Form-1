@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { Exo_2 } from "next/font/google";
+import { useSearchParams } from "next/navigation";
 
 const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" });
 const BRAND = "LocalLink Digital";
@@ -14,12 +15,9 @@ const G = ({ children }: { children: React.ReactNode }) => (
   </span>
 );
 
-export default function ContactPage({
-  searchParams,
-}: {
-  searchParams?: { business?: string; name?: string; email?: string; phone?: string };
-}) {
-  const businessPrefill = searchParams?.business ?? "";
+export default function ContactPage() {
+  const params = useSearchParams();
+  const businessPrefill = params.get("business") ?? "";
 
   return (
     <div className="min-h-screen bg-black text-zinc-100 antialiased">
@@ -39,6 +37,7 @@ export default function ContactPage({
       </header>
 
       <main>
+        {/* Hero */}
         <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
           <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
             <p className="mb-2 text-xs tracking-[0.35em] text-zinc-400">GET IN TOUCH</p>
@@ -51,6 +50,7 @@ export default function ContactPage({
           </div>
         </section>
 
+        {/* Form */}
         <section className="bg-black">
           <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 gap-10 px-6 py-12 sm:grid-cols-2 sm:px-8">
             <div>
@@ -71,15 +71,40 @@ export default function ContactPage({
                 name="business"
                 placeholder="Business name"
                 defaultValue={businessPrefill}
-                autoFocus={businessPrefill.length > 0 ? false : true}
                 autoComplete="organization"
               />
-              <input className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60" name="name" placeholder="Your name" autoComplete="name" />
-              <input className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60" type="email" name="email" placeholder="Email" autoComplete="email" />
-              <input className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60" type="tel" name="phone" inputMode="tel" placeholder="Phone" autoComplete="tel" />
-              <textarea className="min-h-[120px] w-full rounded-xl border border-white/15 bg-white/5 p-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60" name="message" placeholder="What do you do? What’s the main goal of this site?" />
-              <button className="h-11 w-full rounded-full bg-white font-semibold text-black hover:bg-zinc-200 transition">Request Preview</button>
-              <p className="text-xs text-zinc-500">By submitting, you agree to be contacted about your project.</p>
+              <input
+                className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
+                name="name"
+                placeholder="Your name"
+                autoComplete="name"
+              />
+              <input
+                className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
+                type="email"
+                name="email"
+                placeholder="Email"
+                autoComplete="email"
+              />
+              <input
+                className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
+                type="tel"
+                name="phone"
+                inputMode="tel"
+                placeholder="Phone"
+                autoComplete="tel"
+              />
+              <textarea
+                className="min-h-[120px] w-full rounded-xl border border-white/15 bg-white/5 p-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
+                name="message"
+                placeholder="What do you do? What’s the main goal of this site?"
+              />
+              <button className="h-11 w-full rounded-full bg-white font-semibold text-black hover:bg-zinc-200 transition">
+                Request Preview
+              </button>
+              <p className="text-xs text-zinc-500">
+                By submitting, you agree to be contacted about your project.
+              </p>
             </form>
           </div>
         </section>
@@ -109,4 +134,5 @@ export default function ContactPage({
     </div>
   );
 }
+
 
