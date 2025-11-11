@@ -2,7 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { Exo_2 } from "next/font/google";
+import { Exo_2 } from "next/font/google"
+
 
 const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
