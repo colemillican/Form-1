@@ -174,82 +174,78 @@ export default function Page() {
 
       <main className="pt-16 sm:pt-0">
         {/* ============================== HERO (Carousel) ============================== */}
-       <section className="relative isolate flex min-h-[86vh] items-end overflow-hidden">
+      <section className="relative isolate flex min-h-[88vh] flex-col items-center justify-center overflow-hidden text-center">
   {/* rotating backgrounds */}
   <HeroCarousel />
 
   {/* subtle digital overlays */}
   <DigitalOverlay />
 
-  {/* ambient color glows (kept from your style) */}
+  {/* ambient color glows */}
   <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
   <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
 
-  <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
-    <div className="max-w-2xl">
-      <p className="mb-3 text-xs tracking-[0.35em] text-zinc-200">
-        LOCAL SITES // GLOBAL STANDARDS
-      </p>
+  <div className="relative z-10 mx-auto w-full max-w-screen-lg px-6 sm:px-8">
+    {/* tagline */}
+    <p className="mb-3 text-xs tracking-[0.35em] text-zinc-200">
+      LOCAL SITES // GLOBAL STANDARDS
+    </p>
 
-      {/* Smaller, sleeker hero headline (uses your existing hero font) */}
-      <h1 className="text-[clamp(26px,4.2vw,44px)] font-bold leading-[1.1] tracking-tight">
-        <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
-          Captivating design.
-        </span>{" "}
-        Precision technology.
-        <br />
-        Websites that feel <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">as expansive as nature</span>.
-      </h1>
+    {/* headline */}
+    <h1 className="text-[clamp(28px,4vw,48px)] font-bold leading-[1.15] tracking-tight max-w-3xl mx-auto">
+      <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
+        Captivating design.
+      </span>{" "}
+      Precision technology.
+      <br />
+      Websites that feel{" "}
+      <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
+        as expansive as nature.
+      </span>
+    </h1>
 
-      {/* Bridge copy: nature ↔ tech */}
-      <p className="mt-4 max-w-xl text-zinc-100/90">
-        We blend the clarity and scale of the natural world with modern web engineering.
-        The result? Fast, resilient, cinematic sites that attract customers and build trust.
-      </p>
+    {/* subhead */}
+    <p className="mt-4 text-zinc-200 max-w-2xl mx-auto text-[15px] leading-relaxed">
+      We blend the clarity and scale of the natural world with modern web engineering —
+      building cinematic, high-performing websites that empower local businesses to look world-class.
+    </p>
 
-      <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-        <a
-          href="/contact"
-          className="inline-flex h-12 items-center justify-center rounded-full bg-white text-black px-6 text-[15px] font-semibold hover:bg-zinc-200 transition"
-        >
-          Get a Free Preview
-        </a>
-        <a
-          href="/services"
-          className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-5 text-[15px] font-semibold text-white hover:bg-white/10 transition"
-        >
-          See our services
-          <svg className="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </a>
-      </div>
+    {/* interactive input */}
+    <div className="mt-8 flex w-full max-w-md mx-auto flex-col sm:flex-row items-center justify-center gap-3">
+      <input
+        className="flex-1 h-12 rounded-full border border-white/15 bg-white/10 px-5 text-[15px] text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 backdrop-blur-sm transition"
+        placeholder="Start your project — what’s your business called?"
+      />
+      <button className="h-12 w-full sm:w-auto rounded-full bg-white text-black px-6 font-semibold hover:bg-zinc-200 transition">
+        Begin
+      </button>
+    </div>
 
-      {/* key signals */}
-      <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-200 sm:flex">
-        <span className="inline-flex items-center gap-2">
-          <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Built fast
-        </span>
-        <span className="inline-flex items-center gap-2">
-          <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          </svg>
-          Fully managed
-        </span>
-        <span className="inline-flex items-center gap-2">
-          <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <rect x="7" y="2" width="10" height="20" rx="2" />
-            <path d="M11 18h2" />
-          </svg>
-          Mobile-first
-        </span>
-      </div>
+    {/* signals */}
+    <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[13px] text-zinc-200">
+      <span className="inline-flex items-center gap-2">
+        <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        Built fast
+      </span>
+      <span className="inline-flex items-center gap-2">
+        <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        Fully managed
+      </span>
+      <span className="inline-flex items-center gap-2">
+        <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="7" y="2" width="10" height="20" rx="2" />
+          <path d="M11 18h2" />
+        </svg>
+        Mobile-first
+      </span>
     </div>
   </div>
 </section>
+
 
 
         {/* ============================ FEATURE STRIP ============================ */}
