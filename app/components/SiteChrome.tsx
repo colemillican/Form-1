@@ -1,13 +1,11 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import MobileNav from "./MobileNav";
 
 /* ---------------------------------- Brand --------------------------------- */
 const BRAND = "LocalLink Digital";
 
-// Inline logo (gradient mark)
 function LogoInline({ size = 28 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label={`${BRAND} logo`}>
@@ -31,21 +29,29 @@ function LogoInline({ size = 28 }: { size?: number }) {
   );
 }
 
-/** Gradient helper exported for pages */
-export const G = ({ children }: { children: React.ReactNode }) => (
+const G = ({ children }: { children: React.ReactNode }) => (
   <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
     {children}
   </span>
 );
 
-/* ---------------------------------- Chrome -------------------------------- */
-export default function SiteChrome({ children }: { children: React.ReactNode }) {
+const NAV = [
+  { href: "/", label: "HOME", key: "home" },
+  { href: "/services", label: "SERVICES", key: "services" },
+  { href: "/about", label: "ABOUT", key: "about" },
+  { href: "/process", label: "PROCESS", key: "process" },
+  { href: "/pricing", label: "PRICING", key: "pricing" },
+  { href: "/faq", label: "FAQ", key: "faq" },
+  { href: "/contact", label: "CONTACT", key: "contact" },
+];
+
+export function Header({ active }: { active?: string }) {
   return (
-    <div className="min-h-screen bg-black text-zinc-100 antialiased">
-      {/* Mobile nav (always available) */}
+    <>
+      {/* Mobile nav stays consistent too */}
       <MobileNav />
 
-      {/* Desktop NAV */}
+      {/* Desktop NAV (same everywhere) */}
       <header className="hidden sm:block sticky top-0 z-[200] border-b border-white/10 bg-black/70 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-8">
           <Link href="/" className="group flex items-center gap-3">
@@ -59,12 +65,18 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
           </Link>
 
           <nav className="hidden items-center gap-10 text-[13.5px] sm:flex">
-            <Link href="/" className="text-zinc-300 hover:text-white transition">HOME</Link>
-            <Link href="/services" className="text-zinc-300 hover:text-white transition">SERVICES</Link>
-            <Link href="/process" className="text-zinc-300 hover:text-white transition">PROCESS</Link>
-            <Link href="/pricing" className="text-zinc-300 hover:text-white transition">PRICING</Link>
-            <Link href="/faq" className="text-zinc-300 hover:text-white transition">FAQ</Link>
-            <Link href="/contact" className="text-zinc-300 hover:text-white transition">CONTACT</Link>
+            {NAV.map((n) => (
+              <Link
+                key={n.key}
+                href={n.href}
+                className={`transition ${
+                  active === n.key ? "text-white" : "text-zinc-300 hover:text-white"
+                }`}
+              >
+                {n.label}
+              </Link>
+            ))}
+
             <Link
               href="/contact"
               className="inline-flex h-10 items-center justify-center rounded-full bg-white/10 px-4 font-semibold text-white hover:bg-white/20 transition"
@@ -74,35 +86,36 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
           </nav>
         </div>
       </header>
-
-      <main>{children}</main>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10 bg-black">
-        <div className="mx-auto w-full max-w-screen-2xl px-6 py-10 sm:px-8">
-          <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-            <div className="flex items-center gap-3">
-              <LogoInline size={26} />
-              <div className="text-sm">
-                <div className="font-semibold">{BRAND}</div>
-                <div className="text-zinc-400">Modern websites, future-ready</div>
-              </div>
-            </div>
-            <nav className="flex flex-wrap items-center gap-5 text-sm">
-              <Link href="/" className="text-zinc-300 hover:text-white">Home</Link>
-              <Link href="/services" className="text-zinc-300 hover:text-white">Services</Link>
-              <Link href="/process" className="text-zinc-300 hover:text-white">Process</Link>
-              <Link href="/pricing" className="text-zinc-300 hover:text-white">Pricing</Link>
-              <Link href="/faq" className="text-zinc-300 hover:text-white">FAQ</Link>
-              <Link href="/contact" className="text-zinc-300 hover:text-white">Contact</Link>
-            </nav>
-          </div>
-          <div className="mt-6 text-xs text-zinc-500">
-            © {new Date().getFullYear()} {BRAND}. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 }
+
+export function Footer() {
+  return (
+    <footer className="border-t border-white/10 bg-black">
+      <div className="mx-auto w-full max-w-screen-2xl px-6 py-10 sm:px-8">
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <div className="flex items-center gap-3">
+            <LogoInline size={26} />
+            <div className="text-sm">
+              <div className="font-semibold">{BRAND}</div>
+              <div className="text-zinc-400">Modern websites, future-ready</div>
+            </div>
+          </div>
+          <nav className="flex flex-wrap items-center gap-5 text-sm">
+            {NAV.slice(1).map((n) => (
+              <Link key={n.key} href={n.href} className="text-zinc-300 hover:text-white">
+                {n.label.charAt(0) + n.label.slice(1).toLowerCase()}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <div className="mt-6 text-xs text-zinc-500">
+          © {new Date().getFullYear()} {BRAND}. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 
