@@ -51,33 +51,23 @@ const G = ({ children }: { children: React.ReactNode }) => (
 /** Sleek, futuristic hero font (local to this page) */
 const heroFont = Exo_2({
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["700"], // a touch lighter than before so it feels airier
   display: "swap",
 });
 
 /* ----------------------------- Hero Carousel ------------------------------ */
-/** Grand nature only (no city/tech/aliens): */
+/** Grand + bright nature only (vast skies, oceans, mountains, aurora; one starscape) */
 const HERO_IMAGES = [
-  // Mountain sunrise
-  "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=2000&auto=format&fit=crop",
-  // Ocean cliffs
-  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop",
-  // Forest mist
-  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000&auto=format&fit=crop",
-  // Waterfall canyon
-  "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000&auto=format&fit=crop",
-  // Desert dunes
-  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000&auto=format&fit=crop&sat=-20&hue=10",
-  // Aurora night sky
-  "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=2000&auto=format&fit=crop",
-  // Alpine lake
-  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000&auto=format&fit=crop&exp=-5",
-  // Rolling meadow
-  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2000&auto=format&fit=crop",
-  // Snowy ridge
-  "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop",
-  // Dramatic coastline
-  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=2000&auto=format&fit=crop", // mountain sunrise, expansive valley
+  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop", // bright turquoise ocean cliffs
+  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000&auto=format&fit=crop", // misty forest, wide openness
+  "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000&auto=format&fit=crop", // waterfall canyon, bright greens
+  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop", // expansive coastline, bright horizon
+  "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop", // snowy ridge, endless sky
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2000&auto=format&fit=crop", // rolling meadow, big sky
+  "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=2000&auto=format&fit=crop", // starscape (Milky Way), vast night
+  "https://images.unsplash.com/photo-1470770903676-69b98201ea1c?q=80&w=2000&auto=format&fit=crop", // aurora over lake, vivid colors
+  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop", // desert badlands, huge expanse
 ];
 
 function HeroCarousel() {
@@ -85,7 +75,7 @@ function HeroCarousel() {
   useEffect(() => {
     const id = setInterval(() => {
       setIdx((i) => (i + 1) % HERO_IMAGES.length);
-    }, 10000); // rotate about every 10s
+    }, 10000); // ~10s per slide
     return () => clearInterval(id);
   }, []);
 
@@ -98,7 +88,8 @@ function HeroCarousel() {
             i === idx ? "opacity-100" : "opacity-0"
           }`}
           style={{
-            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.30), rgba(0,0,0,0.65)), url(${src})`,
+            // lighter overlay so images stay bright, but still readable for text
+            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.55)), url(${src})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -159,20 +150,20 @@ export default function Page() {
 
           <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 pb-20 sm:px-8">
             <div className="max-w-2xl">
-              <p className="mb-3 text-xs tracking-[0.35em] text-zinc-400">
+              <p className="mb-3 text-xs tracking-[0.35em] text-zinc-300">
                 LOCAL SITES // GLOBAL STANDARDS
               </p>
 
               {/* Smaller hero + new font */}
               <h1
-                className={`${heroFont.className} text-[clamp(28px,4.6vw,48px)] font-extrabold leading-[1.08] tracking-tight`}
+                className={`${heroFont.className} text-[clamp(26px,4.2vw,44px)] font-bold leading-[1.1] tracking-tight`}
               >
                 <G>Empowering</G> local businesses
                 <br />
                 through <G>modern technology</G>.
               </h1>
 
-              <p className="mt-4 max-w-xl text-zinc-300">
+              <p className="mt-4 max-w-xl text-zinc-200">
                 LocalLink Digital turns your local business into a digital powerhouse — building,
                 maintaining, and optimizing a high-performance website that helps you attract
                 customers, stay visible, and save time.
@@ -194,7 +185,7 @@ export default function Page() {
               </div>
 
               {/* key signals */}
-              <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-300 sm:flex">
+              <div className="mt-6 hidden flex-wrap items-center gap-x-8 gap-y-2 text-[13px] text-zinc-200 sm:flex">
                 <span className="inline-flex items-center gap-2">
                   <Bolt className="h-4 w-4 text-emerald-400" /> Built fast
                 </span>
@@ -215,22 +206,22 @@ export default function Page() {
             <Feature
               icon={<Monitor className="h-5 w-5 text-emerald-400" />}
               title="Cinematic Design"
-              text="Bold type, edge-to-edge imagery, motion-ready UI."
+              text="Bold type, bright imagery, motion-ready UI."
             />
             <Feature
               icon={<Globe className="h-5 w-5 text-emerald-400" />}
               title="Next.js Performance"
-              text="App Router, image opt, blazing Core Web Vitals."
+              text="Image optimization, caching, clean Core Web Vitals."
             />
             <Feature
               icon={<Search className="h-5 w-5 text-emerald-400" />}
               title="SEO-Ready"
-              text="Semantic structure, clean metadata, local visibility."
+              text="Semantic structure, metadata, local visibility."
             />
           </div>
         </section>
 
-        {/* =============================== WORK =============================== */}
+        {/* =============================== WORK (sample cards) =============================== */}
         <section id="work" className="bg-zinc-950">
           <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
             <div className="mb-6 flex items-end justify-between">
@@ -286,7 +277,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ============================== PROCESS ============================== */}
+        {/* ============================== PROCESS (summary) ============================== */}
         <section id="process" className="border-t border-white/10 bg-black">
           <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
             <h3 className="text-2xl font-semibold tracking-tight">A lean, three-step build</h3>
@@ -303,10 +294,10 @@ export default function Page() {
           <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 gap-10 px-6 py-16 sm:grid-cols-2 sm:px-8">
             <div>
               <h3 className="text-2xl font-semibold tracking-tight">Start your free preview</h3>
-              <p className="mt-2 max-w-lg text-zinc-300">
+              <p className="mt-2 max-w-lg text-zinc-200">
                 Share a few details. We’ll design a concept that looks like tomorrow and converts today.
               </p>
-              <ul className="mt-4 space-y-2 text-sm text-zinc-300">
+              <ul className="mt-4 space-y-2 text-sm text-zinc-200">
                 <li className="inline-flex items-center gap-2">
                   <Check className="h-4 w-4 text-emerald-400" /> No setup fee
                 </li>
@@ -416,6 +407,7 @@ function Step({ n, title, text }: { n: number; title: string; text: string }) {
     </div>
   );
 }
+
 
 
 
