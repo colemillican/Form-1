@@ -1,108 +1,131 @@
 "use client";
 
 import React from "react";
-import SiteChrome, { G } from "../components/SiteChrome";
-import { Check, ArrowRight, Clock, DollarSign } from "lucide-react";
+import Link from "next/link";
+import { Check } from "lucide-react";
+import { Exo_2 } from "next/font/google";
+
+const heroFont = Exo_2({ subsets: ["latin"], weight: ["700"], display: "swap" });
+
+const Tier = ({
+  name,
+  price,
+  blurb,
+  features,
+  highlight = false,
+}: {
+  name: string;
+  price: string;
+  blurb: string;
+  features: string[];
+  highlight?: boolean;
+}) => (
+  <div className={`rounded-2xl border bg-white/5 p-6 ${highlight ? "border-emerald-400/40" : "border-white/10"}`}>
+    <h3 className={`${heroFont.className} text-xl font-semibold`}>{name}</h3>
+    <div className="mt-1 text-3xl font-bold">${price}<span className="text-base font-medium text-zinc-400">/mo</span></div>
+    <p className="mt-2 text-zinc-300">{blurb}</p>
+    <ul className="mt-4 space-y-2 text-sm text-zinc-200">
+      {features.map((f) => (
+        <li key={f} className="inline-flex items-start gap-2">
+          <Check className="mt-[2px] h-4 w-4 text-emerald-400" /> {f}
+        </li>
+      ))}
+    </ul>
+    <div className="mt-6">
+      <Link href="/contact" className="inline-flex h-11 items-center justify-center rounded-full bg-white text-black px-5 font-semibold hover:bg-zinc-200 transition">
+        Start free preview
+      </Link>
+    </div>
+  </div>
+);
 
 export default function PricingPage() {
-  const tiers = [
-    {
-      name: "Starter Site",
-      price: "$499",
-      desc: "One-page site, mobile-first, contact form.",
-      features: [
-        "1 page (expandable later)",
-        "Modern design & copy polish",
-        "Basic on-page SEO",
-        "Google Business guidance",
-      ],
-      highlight: false,
-    },
-    {
-      name: "Business Boost",
-      price: "$999",
-      desc: "Multi-page site, services pages, launch support.",
-      features: [
-        "Up to 5 pages",
-        "Conversion-focused layout",
-        "On-page SEO + indexing",
-        "Launch & analytics setup",
-      ],
-      highlight: true,
-    },
-    {
-      name: "Full Presence",
-      price: "$1499",
-      desc: "Brand kit, site, and growth essentials.",
-      features: [
-        "Up to 8 pages",
-        "Light brand kit & copywriting",
-        "SEO basics + Google Business",
-        "3 months of site care",
-      ],
-      highlight: false,
-    },
-  ];
-
   return (
-    <SiteChrome>
-      <section className="bg-black">
-        <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
-          <h1 className="text-3xl font-semibold tracking-tight">
-            Simple, transparent <G>pricing</G>
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm text-zinc-400">Pick a starting point. We’ll tailor details to your business and budget.</p>
-
-          <div className="mt-6 grid gap-6 sm:grid-cols-3">
-            {tiers.map((tier) => (
-              <div
-                key={tier.name}
-                className={[
-                  "rounded-2xl border p-6 md:p-8 flex flex-col bg-white/5",
-                  tier.highlight ? "border-white/30 shadow-[0_8px_40px_-15px_rgba(0,0,0,0.5)]" : "border-white/10",
-                ].join(" ")}
-              >
-                {tier.highlight && (
-                  <span className="self-start rounded-full bg-white/10 text-white text-xs px-3 py-1 mb-4">
-                    Most popular
-                  </span>
-                )}
-                <h2 className="text-lg font-semibold">{tier.name}</h2>
-                <p className="mt-1 text-zinc-300">{tier.desc}</p>
-                <div className="mt-5 text-4xl font-semibold">{tier.price}</div>
-                <ul className="mt-5 space-y-2 text-sm">
-                  {tier.features.map((f) => (
-                    <li key={f} className="flex items-start gap-3 text-zinc-300">
-                      <Check className="mt-0.5 h-4 w-4 text-emerald-400" />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="/contact"
-                  className={[
-                    "mt-6 inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 transition text-sm font-semibold",
-                    tier.highlight
-                      ? "bg-white text-black hover:bg-zinc-200"
-                      : "border border-white/20 text-white hover:bg-white/10",
-                  ].join(" ")}
-                >
-                  Choose {tier.name} <ArrowRight className="size-4" />
-                </a>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6 flex flex-wrap items-center gap-6 text-xs text-zinc-400">
-            <span className="inline-flex items-center gap-2">
-              <Clock className="h-4 w-4" /> 2–3 week average build
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <DollarSign className="h-4 w-4" /> No hidden fees
-            </span>
-          </div>
+    <div className="min-h-screen bg-black text-zinc-100 antialiased">
+      {/* Top Bar */}
+      <header className="sticky top-0 z-[200] border-b border-white/10 bg-black/70 backdrop-blur">
+        <div className="mx-auto flex h-14 w-full max-w-screen-2xl items-center justify-between px-6 sm:px-8">
+          <Link href="/" className="text-sm font-semibold text-zinc-300 hover:text-white">
+            ← Home
+          </Link>
+          <nav className="hidden sm:flex items-center gap-6 text-sm">
+            <Link href="/services" className="text-zinc-300 hover:text-white">Services</Link>
+            <Link href="/about" className="text-zinc-300 hover:text-white">About</Link>
+            <Link href="/process" className="text-zinc-300 hover:text-white">Process</Link>
+            <Link href="/pricing" className="text-white">Pricing</Link>
+            <Link href="/faq" className="text-zinc-300 hover:text-white">FAQ</Link>
+            <Link href="/contact" className="text-zinc-300 hover:text-white">Contact</Link>
+          </nav>
         </div>
-      </section>
-    </SiteChrome>
+      </header>
+
+      <main>
+        {/* Hero */}
+        <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
+          <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8 text-center">
+            <p className="mb-2 text-xs tracking-[0.35em] text-zinc-400">STRAIGHTFORWARD</p>
+            <h1 className={`${heroFont.className} text-[clamp(28px,4.2vw,44px)] font-bold tracking-tight`}>
+              Simple pricing for <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">real outcomes</span>.
+            </h1>
+            <p className="mt-3 max-w-3xl mx-auto text-zinc-300">
+              Start with a free concept. Launch on a plan that fits. Upgrade any time.
+            </p>
+          </div>
+        </section>
+
+        {/* Tiers */}
+        <section className="bg-black">
+          <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8 grid gap-6 md:grid-cols-3">
+            <Tier
+              name="Starter"
+              price="79"
+              blurb="A clean, beautiful site that covers the essentials."
+              features={[
+                "One-page site (hero, services, contact)",
+                "Mobile-first design",
+                "Core SEO & analytics",
+                "Two content edits/mo",
+                "Managed hosting",
+              ]}
+            />
+            <Tier
+              name="Business"
+              price="149"
+              blurb="Multi-page site with stronger storytelling & conversion."
+              features={[
+                "Up to 6 pages",
+                "Refined brand type & color",
+                "Componentized sections",
+                "Four content edits/mo",
+                "Priority support",
+              ]}
+              highlight
+            />
+            <Tier
+              name="Growth"
+              price="299"
+              blurb="Premium visuals and ongoing iteration to drive results."
+              features={[
+                "Up to 12 pages",
+                "Custom visuals & interactions",
+                "Quarterly optimization review",
+                "Unlimited minor edits",
+                "A/B testing ready",
+              ]}
+            />
+          </div>
+
+          <div className="mx-auto max-w-screen-2xl px-6 pb-16 text-center">
+            <Link
+              href="/contact"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-white text-black px-6 font-semibold hover:bg-zinc-200 transition"
+            >
+              Get your free preview
+            </Link>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
+
