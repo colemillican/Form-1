@@ -50,11 +50,11 @@ export default function ServicesPage() {
         {/* Service Cards */}
         <section className="bg-black">
           <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8 grid gap-6 md:grid-cols-2">
-            {/* Design */}
+            {/* Cinematic Design */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1600&auto=format&fit=crop"
-                alt="Clean interface composition"
+                src="https://images.unsplash.com/photo-1607082350914-003bb52b8b3b?q=80&w=1600&auto=format&fit=crop"
+                alt="Cinematic design interface"
                 className="w-full aspect-[16/9] object-cover"
               />
               <div className="p-6">
@@ -73,8 +73,8 @@ export default function ServicesPage() {
             {/* Performance */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://images.unsplash.com/photo-1512291313938-82fcbf846b55?q=80&w=1600&auto=format&fit=crop"
-                alt="Fast technology imagery"
+                src="https://images.unsplash.com/photo-1581091012184-7f3dd241c2f6?q=80&w=1600&auto=format&fit=crop"
+                alt="Speed and performance"
                 className="w-full aspect-[16/9] object-cover"
               />
               <div className="p-6">
@@ -93,8 +93,8 @@ export default function ServicesPage() {
             {/* SEO */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop"
-                alt="Search visibility"
+                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1600&auto=format&fit=crop"
+                alt="SEO optimization graphic"
                 className="w-full aspect-[16/9] object-cover"
               />
               <div className="p-6">
@@ -113,8 +113,8 @@ export default function ServicesPage() {
             {/* Management */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop"
-                alt="Ongoing management"
+                src="https://images.unsplash.com/photo-1627454826584-c990b8ed4c1e?q=80&w=1600&auto=format&fit=crop"
+                alt="Ongoing website management"
                 className="w-full aspect-[16/9] object-cover"
               />
               <div className="p-6">
@@ -144,6 +144,7 @@ export default function ServicesPage() {
     </div>
   );
 }
+
 
 
 
