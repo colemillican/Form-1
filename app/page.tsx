@@ -137,7 +137,7 @@ export default function Page() {
       </header>
 
       <main className="pt-16 sm:pt-0">
-       {/* ============================== HERO ============================== */}
+      {/* ============================== HERO ============================== */}
 <section className="relative isolate flex min-h-[86vh] items-center justify-center overflow-hidden">
   {/* Carousel (background) */}
   <HeroCarousel />
@@ -163,9 +163,8 @@ export default function Page() {
 
       {/* Subheadline */}
       <p className="mt-4 text-zinc-200">
-        LocalLink Digital turns your local business into a digital powerhouse — building,
-        maintaining, and optimizing a high-performance website that helps you attract customers,
-        stay visible, and save time.
+        We bring your story to life online — building and maintaining beautiful,
+        high-performing websites optimized for search, speed, and long-term success.
       </p>
 
       {/* Input + Buttons */}
@@ -209,6 +208,7 @@ export default function Page() {
     </div>
   </div>
 </section>
+
 
         {/* =============================== WORK (sample cards) =============================== */}
         <section id="work" className="bg-zinc-950">
