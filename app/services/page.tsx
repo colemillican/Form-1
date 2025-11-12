@@ -53,7 +53,7 @@ export default function ServicesPage() {
             {/* Design */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=1600&auto=format&fit=crop"
+                src="https://unsplash.com/photos/photo-of-outer-space-Q1p7bh3SHj8"
                 alt="Clean interface composition"
                 className="w-full aspect-[16/9] object-cover"
               />
