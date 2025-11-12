@@ -52,11 +52,12 @@ export default function ServicesPage() {
           <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8 grid gap-6 md:grid-cols-2">
             {/* Cinematic Design */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-              <img
-                src="https://images.unsplash.com/photo-1604079628045-bd52dfb0b7a4?q=80&w=2000&auto=format&fit=crop"
-                alt="Cinematic design interface"
-                className="w-full aspect-[16/9] object-cover"
-              />
+             <img
+      src="https://images.unsplash.com/photo-1603575448362-410dcb0b8888?q=80&w=2000&auto=format&fit=crop"
+              alt="Cinematic design interface"
+              className="w-full aspect-[16/9] object-cover"
+            />
+
               <div className="p-6">
                 <h3 className={`${heroFont.className} text-xl font-semibold`}>Cinematic Design</h3>
                 <p className="mt-2 text-zinc-300">
