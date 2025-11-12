@@ -53,7 +53,7 @@ export default function ServicesPage() {
             {/* Cinematic Design */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://source.unsplash.com/1600x900/?web,design,ui"
+                src="https://images.unsplash.com/photo-1604079628045-bd52dfb0b7a4?q=80&w=2000&auto=format&fit=crop"
                 alt="Cinematic design interface"
                 className="w-full aspect-[16/9] object-cover"
               />
@@ -73,7 +73,7 @@ export default function ServicesPage() {
             {/* Performance */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://source.unsplash.com/1600x900/?technology,speed,server"
+                src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2000&auto=format&fit=crop"
                 alt="Fast technology imagery"
                 className="w-full aspect-[16/9] object-cover"
               />
@@ -93,8 +93,8 @@ export default function ServicesPage() {
             {/* SEO */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://source.unsplash.com/1600x900/?seo,analytics,marketing"
-                alt="Search visibility"
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop"
+                alt="SEO optimization"
                 className="w-full aspect-[16/9] object-cover"
               />
               <div className="p-6">
@@ -113,7 +113,7 @@ export default function ServicesPage() {
             {/* Management */}
             <article className="rounded-2xl overflow-hidden border border-white/10 bg-white/5">
               <img
-                src="https://source.unsplash.com/1600x900/?computer,workflow,management"
+                src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2000&auto=format&fit=crop"
                 alt="Ongoing management"
                 className="w-full aspect-[16/9] object-cover"
               />
