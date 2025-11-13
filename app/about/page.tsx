@@ -24,10 +24,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CONTENT + SMALLER VISUAL */}
+      {/* CONTENT + VISUAL */}
       <section className="bg-black">
         <div className="mx-auto max-w-screen-2xl px-6 py-14 sm:px-8 grid gap-10 md:grid-cols-[1.5fr,1fr] items-center">
-          
           {/* Copy side */}
           <div className="space-y-5 text-zinc-300 leading-relaxed">
             <p>
@@ -47,12 +46,12 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Visual */}
+          {/* Tech visual */}
           <div className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop"
-              alt="Team collaborating"
-              className="w-full aspect-[21/9] object-cover"   // << SHRUNK IMAGE
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop"
+              alt="Code on screen and developer workspace"
+              className="w-full aspect-[21/9] object-cover"
             />
             <div className="p-4 text-xs sm:text-sm text-zinc-200 space-y-2">
               <div className="font-semibold text-base">How we think about “good”</div>
@@ -66,6 +65,7 @@ export default function AboutPage() {
     </SiteChrome>
   );
 }
+
 
 
 
