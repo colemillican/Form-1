@@ -52,7 +52,7 @@ export default function AboutPage() {
             <img
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop"
               alt="Team collaborating"
-              className="w-full aspect-[5/3] object-cover"   // << SHRUNK IMAGE
+              className="w-full aspect-[16/9] object-cover"   // << SHRUNK IMAGE
             />
             <div className="p-4 text-xs sm:text-sm text-zinc-200 space-y-2">
               <div className="font-semibold text-base">How we think about “good”</div>
