@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import {
   Bolt,
@@ -13,14 +14,14 @@ import {
 import { Exo_2 } from "next/font/google";
 import SiteChrome, { G } from "./components/SiteChrome";
 
-/* Headline font – slightly lighter for a more premium feel */
+/* Headline font */
 const heroFont = Exo_2({
   subsets: ["latin"],
-  weight: ["600"],
+  weight: ["700"],
   display: "swap",
 });
 
-/* Hero carousel images (grand nature) */
+/* Hero carousel images (your original scenic set) */
 const HERO_IMAGES = [
   "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop",
@@ -34,23 +35,28 @@ const HERO_IMAGES = [
 
 function HeroCarousel() {
   const [idx, setIdx] = useState(0);
+
   useEffect(() => {
     const id = setInterval(
       () => setIdx((i) => (i + 1) % HERO_IMAGES.length),
-      10000
+      30000 // 30 seconds
     );
     return () => clearInterval(id);
   }, []);
+
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden">
       {HERO_IMAGES.map((src, i) => (
         <div
           key={src + i}
-          className={`absolute inset-0 transition-opacity duration-[1200ms] ease-out ${
+          className={`absolute inset-0 transition-opacity duration-[1500ms] ease-out ${
             i === idx ? "opacity-100" : "opacity-0"
           }`}
           style={{
-            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.16), rgba(0,0,0,0.50)), url(${src})`,
+            backgroundImage: `
+              radial-gradient(circle at center, rgba(0,0,0,0.08), rgba(0,0,0,0.18)),
+              url(${src})
+            `,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -98,67 +104,57 @@ function Step({ n, title, text }: { n: number; title: string; text: string }) {
 export default function Page() {
   return (
     <SiteChrome>
-      {/* HERO (centered, cinematic + story-first) */}
-      <section className="relative isolate flex min-h-[86vh] items-center justify-center overflow-hidden">
+      {/* ================= HERO ================= */}
+      <section className="relative isolate flex min-h-[80vh] items-center justify-center overflow-hidden">
         <HeroCarousel />
-        <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/15 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/10 blur-3xl" />
+
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            {/* Clean, two-line story-first headline */}
             <h1
-              className={`${heroFont.className} text-[clamp(34px,5.5vw,64px)] font-semibold leading-[1.06] tracking-tight`}
+              className={`${heroFont.className} text-[clamp(38px,5.6vw,62px)] font-bold leading-[1.05] tracking-[0.02em]`}
             >
               <G>Stories that connect.</G>
               <br />
               <G>Websites that perform.</G>
             </h1>
 
-            <p className="mt-4 text-[15px] leading-relaxed text-zinc-200 sm:text-[16px]">
+            <p className="mt-5 text-[15px] leading-relaxed text-zinc-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
               We bring your story to life online — designing, building, and
               managing beautiful, high-performing websites that help local
               customers find you, trust you, and reach you.
             </p>
 
-            {/* Glass CTA strip – input + button without big white block */}
-            <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <input
-                type="text"
-                placeholder="Tell us about your business in one sentence..."
-                className="h-12 w-full max-w-[460px] rounded-full border border-white/25 bg-black/25 px-5 text-[15px] text-white placeholder:text-zinc-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-emerald-400/80"
-              />
-              <button
-                type="button"
-                className="inline-flex h-12 items-center justify-center rounded-full bg-emerald-500 px-7 text-[15px] font-semibold text-black shadow-sm hover:bg-emerald-400 transition w-full max-w-[220px] sm:w-auto"
+            {/* Centered CTA */}
+            <div className="mt-8 flex justify-center">
+              <a
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-12 py-4 text-[16px] font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.45)] transition hover:from-emerald-300 hover:to-emerald-200 hover:shadow-[0_18px_40px_rgba(16,185,129,0.55)]"
               >
-                <span>Get my free outline</span>
+                Get my free website outline
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
+              </a>
             </div>
-            <p className="mt-3 text-[11px] text-zinc-300">
-              No payment, no obligation. We review what you share and send back
-              a custom website outline for your business.
-            </p>
 
-            <div className="mt-7 hidden flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[13px] text-zinc-300 sm:flex">
+            {/* Badges */}
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-[13px] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
               <span className="inline-flex items-center gap-2">
-                <Bolt className="h-4 w-4 text-emerald-400" /> Built for local
-                businesses
+                <Bolt className="h-4 w-4 text-emerald-300" />
+                Built for local businesses
               </span>
               <span className="inline-flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-emerald-400" /> Fully
-                managed partnership
+                <ShieldCheck className="h-4 w-4 text-emerald-300" />
+                Fully managed partnership
               </span>
               <span className="inline-flex items-center gap-2">
-                <Smartphone className="h-4 w-4 text-emerald-400" /> Fast and
-                mobile-first
+                <Smartphone className="h-4 w-4 text-emerald-300" />
+                Fast and mobile-first
               </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Feature strip */}
+      {/* ============== FEATURE STRIP ============== */}
       <section
         id="services"
         className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950"
@@ -167,22 +163,22 @@ export default function Page() {
           <Feature
             icon={<Monitor className="h-5 w-5 text-emerald-400" />}
             title="Cinematic design"
-            text="Bold type, real imagery, and layouts that feel like your business — not a generic template."
+            text="Bold type, bright imagery, and layouts built to feel premium on any screen."
           />
           <Feature
             icon={<Globe className="h-5 w-5 text-emerald-400" />}
             title="Modern performance"
-            text="Optimized for search, speed, and mobile — so locals actually find and use your site."
+            text="Fast-loading, Next.js-powered builds tuned for Core Web Vitals."
           />
           <Feature
             icon={<Search className="h-5 w-5 text-emerald-400" />}
-            title="Built to convert"
-            text="Clear messaging and calls-to-action focused on calls, bookings, and walk-ins, not just page views."
+            title="Local SEO ready"
+            text="Clean structure, metadata, and content strategy for local visibility."
           />
         </div>
       </section>
 
-      {/* Work (sample) */}
+      {/* ============== WORK (SAMPLE PROJECTS) ============== */}
       <section id="work" className="bg-zinc-950">
         <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
           <div className="mb-6 flex items-end justify-between">
@@ -191,30 +187,35 @@ export default function Page() {
             </h3>
             <a
               href="/contact"
-              className="hidden sm:inline-flex items-center text-sm font-semibold text-zinc-300 hover:text-white"
+              className="hidden items-center text-sm font-semibold text-zinc-300 hover:text-white sm:inline-flex"
             >
-              Request a preview <ArrowRight className="ml-1 h-4 w-4" />
+              Request a preview
+              <ArrowRight className="ml-1 h-4 w-4" />
             </a>
           </div>
+
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 tag: "HOME SERVICES",
                 title: "Precision HVAC",
                 img: "https://images.unsplash.com/photo-1520975922284-9b9a45d43f9a?q=80&w=1600&auto=format&fit=crop",
-                blurb: "High-contrast landing + sticky call CTA.",
+                blurb:
+                  "High-contrast landing, service sections, and a sticky call CTA.",
               },
               {
                 tag: "FITNESS",
                 title: "IronForge Gym",
                 img: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1600&auto=format&fit=crop",
-                blurb: "Hero video, class schedule, simple join flow.",
+                blurb:
+                  "Hero imagery, class schedule, and a simple join flow for new members.",
               },
               {
                 tag: "AUTO DETAIL",
                 title: "Ceramic Pro Studio",
                 img: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1600&auto=format&fit=crop",
-                blurb: "Glossy visuals, package matrix, lead form.",
+                blurb:
+                  "Glossy visuals, package matrix, and a lead capture form tuned for bookings.",
               },
             ].map((c, i) => (
               <article
@@ -227,7 +228,7 @@ export default function Page() {
                     src={c.img}
                     className="aspect-[4/3] w-full object-cover opacity-90 transition group-hover:opacity-100"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/15" />
                 </div>
                 <div className="p-5">
                   <span className="inline-block rounded-md border border-white/15 bg-white/5 px-2 py-1 text-[11px] font-medium tracking-wide text-zinc-300">
@@ -242,33 +243,33 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Process (summary) */}
+      {/* ============== PROCESS SUMMARY ============== */}
       <section id="process" className="border-t border-white/10 bg-black">
         <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
           <h3 className="text-2xl font-semibold tracking-tight">
-            A lean, three-step build
+            A simple three-step build
           </h3>
           <div className="mt-6 grid gap-5 sm:grid-cols-3">
             <Step
               n={1}
               title="Discover"
-              text="We capture your goals, brand tone, and the people you want to reach."
+              text="We learn your story, audience, and goals so the site feels like an extension of your business."
             />
             <Step
               n={2}
               title="Design"
-              text="Cinematic hero, clean layout, and premium typography matched to your story."
+              text="We build a cinematic, conversion-focused layout tailored to your brand and offers."
             />
             <Step
               n={3}
               title="Launch"
-              text="Deployed, hosted, and managed — with analytics wired so you can see results."
+              text="We deploy, monitor, and manage your site so it stays fast, secure, and up to date."
             />
           </div>
         </div>
       </section>
 
-      {/* Contact teaser */}
+      {/* ============== CONTACT TEASER ============== */}
       <section
         id="contact"
         className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950"
@@ -279,23 +280,25 @@ export default function Page() {
               Start your free preview
             </h3>
             <p className="mt-2 max-w-lg text-zinc-200">
-              Share a few details. We’ll design a concept tailored to your
-              business, so you can see what a modern, story-driven site could do
-              for you.
+              Share a few details about your business. We’ll sketch a concept
+              that feels like tomorrow and converts today.
             </p>
             <ul className="mt-4 space-y-2 text-sm text-zinc-200">
               <li className="inline-flex items-center gap-2">
-                <Check className="h-4 w-4 text-emerald-400" /> No setup fee
+                <Check className="h-4 w-4 text-emerald-400" />
+                No long-term contracts
               </li>
               <li className="inline-flex items-center gap-2">
-                <Check className="h-4 w-4 text-emerald-400" /> Fast turnaround
+                <Check className="h-4 w-4 text-emerald-400" />
+                Clear pricing and timeline
               </li>
               <li className="inline-flex items-center gap-2">
-                <Check className="h-4 w-4 text-emerald-400" /> Fully managed
-                after launch
+                <Check className="h-4 w-4 text-emerald-400" />
+                Fully managed after launch
               </li>
             </ul>
           </div>
+
           <form className="max-w-xl space-y-3">
             <input
               className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
@@ -320,8 +323,8 @@ export default function Page() {
               className="min-h-[120px] w-full rounded-xl border border-white/15 bg-white/5 p-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
               placeholder="What do you do? What’s the main goal of this site?"
             />
-            <button className="h-11 w-full rounded-full bg-white font-semibold text-black hover:bg-zinc-200 transition">
-              Request Preview
+            <button className="h-11 w-full rounded-full bg-white font-semibold text-black transition hover:bg-zinc-200">
+              Request preview
             </button>
             <p className="text-xs text-zinc-500">
               By submitting, you agree to be contacted about your project.
@@ -332,6 +335,7 @@ export default function Page() {
     </SiteChrome>
   );
 }
+
 
 
 
