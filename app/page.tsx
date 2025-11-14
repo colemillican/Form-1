@@ -117,7 +117,7 @@ export default function Page() {
             <p className="mt-4 text-[15px] leading-relaxed text-zinc-200 sm:text-[16px]">
               We bring your story to life online — designing, building, and
               managing beautiful, high-performing websites that help local
-              customers find you, trust you, and reach out.
+              customers find you, trust you, and reach you.
             </p>
 
             {/* Glass CTA strip – input + button without big white block */}
