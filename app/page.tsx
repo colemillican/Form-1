@@ -110,12 +110,36 @@ export default function Page() {
 
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
+            {/* Headline with separate mobile/desktop layouts */}
             <h1
-              className={`${heroFont.className} text-[clamp(38px,5.6vw,62px)] font-bold leading-[1.05] tracking-[0.02em]`}
+              className={`
+                ${heroFont.className}
+                text-[clamp(30px,7vw,56px)]
+                font-bold
+                leading-[1.05]
+                tracking-[0.02em]
+                mx-auto
+                text-center
+                max-w-[340px]
+                sm:max-w-none
+              `}
+              style={{
+                textShadow: "0 6px 22px rgba(0,0,0,0.42)",
+              }}
             >
-              <G>Stories that connect.</G>
-              <br />
-              <G>Websites that perform.</G>
+              {/* MOBILE: force 2 lines */}
+              <span className="sm:hidden block">
+                <G>Stories that connect.</G>
+                <br />
+                <G>Websites that perform.</G>
+              </span>
+
+              {/* DESKTOP: same copy, desktop layout control */}
+              <span className="hidden sm:block">
+                <G>Stories that connect.</G>
+                <br />
+                <G>Websites that perform.</G>
+              </span>
             </h1>
 
             <p className="mt-5 text-[15px] leading-relaxed text-zinc-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
@@ -335,6 +359,7 @@ export default function Page() {
     </SiteChrome>
   );
 }
+
 
 
 
