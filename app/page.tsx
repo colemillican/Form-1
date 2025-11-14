@@ -21,7 +21,7 @@ const heroFont = Exo_2({
   display: "swap",
 });
 
-/* Hero carousel images (your original scenic set) */
+/* Hero carousel images (grand nature) */
 const HERO_IMAGES = [
   "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop",
@@ -49,14 +49,11 @@ function HeroCarousel() {
       {HERO_IMAGES.map((src, i) => (
         <div
           key={src + i}
-          className={`absolute inset-0 transition-opacity duration-[1500ms] ease-out ${
+          className={`absolute inset-0 transition-opacity duration-[1600ms] ease-out ${
             i === idx ? "opacity-100" : "opacity-0"
           }`}
           style={{
-            backgroundImage: `
-              radial-gradient(circle at center, rgba(0,0,0,0.08), rgba(0,0,0,0.18)),
-              url(${src})
-            `,
+            backgroundImage: `url(${src})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -104,39 +101,80 @@ function Step({ n, title, text }: { n: number; title: string; text: string }) {
 export default function Page() {
   return (
     <SiteChrome>
-      {/* ================= HERO ================= */}
-      <section className="relative isolate flex min-h-[80vh] items-center justify-center overflow-hidden">
+      {/* HERO */}
+      <section className="relative isolate flex min-h-[86vh] items-center justify-center overflow-hidden">
         <HeroCarousel />
+
+        {/* Soft color glows for depth (not darkening the image) */}
+        <div className="pointer-events-none absolute -top-24 -left-24 h-[50vh] w-[50vh] rounded-full bg-emerald-500/18 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-40 -right-40 h-[55vh] w-[55vh] rounded-full bg-blue-500/18 blur-3xl" />
 
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h1
-              className={`${heroFont.className} text-[clamp(38px,5.6vw,62px)] font-bold leading-[1.05] tracking-[0.02em]`}
+              className={`
+                ${heroFont.className}
+                text-[clamp(30px,7vw,56px)]
+                font-bold
+                leading-[1.05]
+                tracking-tight
+                mx-auto
+                max-w-[330px]
+                sm:max-w-none
+              `}
+              style={{
+                textShadow: "0 6px 22px rgba(0,0,0,0.42)",
+              }}
             >
               <G>Stories that connect.</G>
               <br />
               <G>Websites that perform.</G>
             </h1>
 
-            <p className="mt-5 text-[15px] leading-relaxed text-zinc-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
+            <p
+              className="
+                mt-4
+                mx-auto
+                max-w-[310px]
+                sm:max-w-xl
+                text-[15px]
+                sm:text-[16px]
+                text-zinc-100
+              "
+            >
               We bring your story to life online — designing, building, and
               managing beautiful, high-performing websites that help local
               customers find you, trust you, and reach you.
             </p>
 
-            {/* Centered CTA */}
-            <div className="mt-8 flex justify-center">
+            {/* CTA */}
+            <div className="mt-7 flex justify-center">
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-12 py-4 text-[16px] font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.45)] transition hover:from-emerald-300 hover:to-emerald-200 hover:shadow-[0_18px_40px_rgba(16,185,129,0.55)]"
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-emerald-400
+                  px-7 py-3
+                  sm:px-10 sm:py-3.5
+                  text-[16px] sm:text-[17px]
+                  font-semibold
+                  text-black
+                  shadow-[0_18px_45px_rgba(16,185,129,0.55)]
+                  transition
+                  hover:bg-emerald-300
+                  hover:shadow-[0_22px_55px_rgba(16,185,129,0.7)]
+                "
               >
                 Get my free website outline
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </div>
 
-            {/* Badges */}
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-[13px] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
+            {/* Quick proof points */}
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-[13px] text-zinc-100">
               <span className="inline-flex items-center gap-2">
                 <Bolt className="h-4 w-4 text-emerald-300" />
                 Built for local businesses
@@ -154,7 +192,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ============== FEATURE STRIP ============== */}
+      {/* Feature strip */}
       <section
         id="services"
         className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950"
@@ -162,60 +200,55 @@ export default function Page() {
         <div className="mx-auto grid w-full max-w-screen-2xl grid-cols-1 gap-4 px-6 py-10 sm:grid-cols-3 sm:px-8">
           <Feature
             icon={<Monitor className="h-5 w-5 text-emerald-400" />}
-            title="Cinematic design"
-            text="Bold type, bright imagery, and layouts built to feel premium on any screen."
+            title="Cinematic Design"
+            text="Bold type, bright imagery, motion-ready UI."
           />
           <Feature
             icon={<Globe className="h-5 w-5 text-emerald-400" />}
-            title="Modern performance"
-            text="Fast-loading, Next.js-powered builds tuned for Core Web Vitals."
+            title="Next.js Performance"
+            text="Image optimization, caching, clean Core Web Vitals."
           />
           <Feature
             icon={<Search className="h-5 w-5 text-emerald-400" />}
-            title="Local SEO ready"
-            text="Clean structure, metadata, and content strategy for local visibility."
+            title="SEO-Ready"
+            text="Semantic structure, metadata, local visibility."
           />
         </div>
       </section>
 
-      {/* ============== WORK (SAMPLE PROJECTS) ============== */}
+      {/* Work (sample) */}
       <section id="work" className="bg-zinc-950">
         <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
           <div className="mb-6 flex items-end justify-between">
             <h3 className="text-2xl font-semibold tracking-tight">
-              Recent launches
+              Recent Launches
             </h3>
             <a
               href="/contact"
               className="hidden items-center text-sm font-semibold text-zinc-300 hover:text-white sm:inline-flex"
             >
-              Request a preview
-              <ArrowRight className="ml-1 h-4 w-4" />
+              Request a preview <ArrowRight className="ml-1 h-4 w-4" />
             </a>
           </div>
-
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 tag: "HOME SERVICES",
                 title: "Precision HVAC",
                 img: "https://images.unsplash.com/photo-1520975922284-9b9a45d43f9a?q=80&w=1600&auto=format&fit=crop",
-                blurb:
-                  "High-contrast landing, service sections, and a sticky call CTA.",
+                blurb: "High-contrast landing + sticky call CTA.",
               },
               {
                 tag: "FITNESS",
                 title: "IronForge Gym",
                 img: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1600&auto=format&fit=crop",
-                blurb:
-                  "Hero imagery, class schedule, and a simple join flow for new members.",
+                blurb: "Hero video, class schedule, simple join flow.",
               },
               {
                 tag: "AUTO DETAIL",
                 title: "Ceramic Pro Studio",
                 img: "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1600&auto=format&fit=crop",
-                blurb:
-                  "Glossy visuals, package matrix, and a lead capture form tuned for bookings.",
+                blurb: "Glossy visuals, package matrix, lead form.",
               },
             ].map((c, i) => (
               <article
@@ -228,7 +261,7 @@ export default function Page() {
                     src={c.img}
                     className="aspect-[4/3] w-full object-cover opacity-90 transition group-hover:opacity-100"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/15" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
                 </div>
                 <div className="p-5">
                   <span className="inline-block rounded-md border border-white/15 bg-white/5 px-2 py-1 text-[11px] font-medium tracking-wide text-zinc-300">
@@ -243,33 +276,33 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ============== PROCESS SUMMARY ============== */}
+      {/* Process (summary) */}
       <section id="process" className="border-t border-white/10 bg-black">
         <div className="mx-auto w-full max-w-screen-2xl px-6 py-14 sm:px-8">
           <h3 className="text-2xl font-semibold tracking-tight">
-            A simple three-step build
+            A lean, three-step build
           </h3>
           <div className="mt-6 grid gap-5 sm:grid-cols-3">
             <Step
               n={1}
               title="Discover"
-              text="We learn your story, audience, and goals so the site feels like an extension of your business."
+              text="We capture your goals, brand tone, and target market."
             />
             <Step
               n={2}
               title="Design"
-              text="We build a cinematic, conversion-focused layout tailored to your brand and offers."
+              text="Cinematic hero, clean layout, premium typography."
             />
             <Step
               n={3}
               title="Launch"
-              text="We deploy, monitor, and manage your site so it stays fast, secure, and up to date."
+              text="Deployed to Vercel, managed updates, analytics wired."
             />
           </div>
         </div>
       </section>
 
-      {/* ============== CONTACT TEASER ============== */}
+      {/* Contact teaser */}
       <section
         id="contact"
         className="border-t border-white/10 bg-gradient-to-b from-black to-zinc-950"
@@ -280,25 +313,22 @@ export default function Page() {
               Start your free preview
             </h3>
             <p className="mt-2 max-w-lg text-zinc-200">
-              Share a few details about your business. We’ll sketch a concept
-              that feels like tomorrow and converts today.
+              Share a few details. We’ll design a concept that looks like
+              tomorrow and converts today.
             </p>
             <ul className="mt-4 space-y-2 text-sm text-zinc-200">
               <li className="inline-flex items-center gap-2">
-                <Check className="h-4 w-4 text-emerald-400" />
-                No long-term contracts
+                <Check className="h-4 w-4 text-emerald-400" /> No setup fee
               </li>
               <li className="inline-flex items-center gap-2">
-                <Check className="h-4 w-4 text-emerald-400" />
-                Clear pricing and timeline
+                <Check className="h-4 w-4 text-emerald-400" /> Fast turnaround
               </li>
               <li className="inline-flex items-center gap-2">
-                <Check className="h-4 w-4 text-emerald-400" />
-                Fully managed after launch
+                <Check className="h-4 w-4 text-emerald-400" /> Fully managed
+                after launch
               </li>
             </ul>
           </div>
-
           <form className="max-w-xl space-y-3">
             <input
               className="h-11 w-full rounded-xl border border-white/15 bg-white/5 px-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
@@ -324,7 +354,7 @@ export default function Page() {
               placeholder="What do you do? What’s the main goal of this site?"
             />
             <button className="h-11 w-full rounded-full bg-white font-semibold text-black transition hover:bg-zinc-200">
-              Request preview
+              Request Preview
             </button>
             <p className="text-xs text-zinc-500">
               By submitting, you agree to be contacted about your project.
@@ -335,6 +365,7 @@ export default function Page() {
     </SiteChrome>
   );
 }
+
 
 
 
