@@ -1,101 +1,130 @@
 "use client";
-import React from "react";
-import MobileNav from "./MobileNav";
 
-/* Brand */
-const BRAND = "LocalLink Digital";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
 
-/* Inline logo */
-function LogoInline({ size = 28 }: { size?: number }) {
+/**
+ * Gradient text helper used in your hero:
+ * <G>Stories that connect.</G>
+ */
+export function G({ children }: { children: React.ReactNode }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label={`${BRAND} logo`}>
-      <defs>
-        <linearGradient id="lld-desktop" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#22c55e" />
-          <stop offset="100%" stopColor="#60a5fa" />
-        </linearGradient>
-      </defs>
-      <rect x="4" y="4" width="56" height="56" rx="14" fill="#22c55e" />
-      <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#lld-desktop)" />
-      <path d="M20 20v24h12M32 44h12V20" stroke="white" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    </svg>
+    <span className="bg-gradient-to-r from-emerald-300 via-teal-300 to-sky-400 bg-clip-text text-transparent">
+      {children}
+    </span>
   );
 }
 
-/* Gradient helper */
-export const G = ({ children }: { children: React.ReactNode }) => (
-  <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
-    {children}
-  </span>
-);
+type SiteChromeProps = {
+  children: React.ReactNode;
+};
 
-/* Shared shell with one true header + footer (desktop) */
-export default function SiteChrome({ children }: { children: React.ReactNode }) {
+const NAV_ITEMS = [
+  { href: "/", label: "Home" },
+  { href: "#services", label: "Services" },
+  { href: "#work", label: "Work" },
+  { href: "#process", label: "Process" },
+  { href: "#pricing", label: "Pricing" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#contact", label: "Contact" },
+];
+
+export default function SiteChrome({ children }: SiteChromeProps) {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-black text-zinc-100 antialiased">
-      {/* Mobile header */}
-      <MobileNav />
+    <div className="min-h-screen bg-black text-white">
+      {/* HEADER */}
+      <header
+        className={`fixed inset-x-0 top-0 z-30 transition-all duration-300 ${
+          scrolled || open
+            ? "bg-black/60 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.45)]"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="mx-auto flex h-14 max-w-screen-2xl items-center justify-between px-4 sm:px-6">
+          {/* Logo mark only */}
+          <Link href="/" className="inline-flex items-center" aria-label="LocalLink Digital home">
+            <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-500 shadow-md">
+              {/* Simple abstract 'link' glyph */}
+              <div className="h-4 w-4 rounded-md border-2 border-white/90 border-b-transparent" />
+            </div>
+          </Link>
 
-      {/* Desktop header (identical on every page) */}
-      <header className="hidden sm:block sticky top-0 z-[200] border-b border-white/10 bg-black/70 backdrop-blur">
-        <div className="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-8">
-          <a href="/" className="group flex items-center gap-3">
-            <LogoInline />
-            <span className="flex items-baseline gap-1">
-              <span className="text-[17px] font-extrabold tracking-tight leading-none">
-                <G>LocalLink</G>
-              </span>
-              <span className="text-[14px] font-semibold text-zinc-400 leading-none">Digital</span>
-            </span>
-          </a>
-
-          <nav className="hidden items-center gap-10 text-[13.5px] sm:flex">
-            <a href="/" className="text-zinc-300 hover:text-white transition">HOME</a>
-            <a href="/services" className="text-zinc-300 hover:text-white transition">SERVICES</a>
-            <a href="/about" className="text-zinc-300 hover:text-white transition">ABOUT</a>
-            <a href="/process" className="text-zinc-300 hover:text-white transition">PROCESS</a>
-            <a href="/pricing" className="text-zinc-300 hover:text-white transition">PRICING</a>
-            <a href="/faq" className="text-zinc-300 hover:text-white transition">FAQ</a>
-            <a href="/contact" className="text-zinc-300 hover:text-white transition">CONTACT</a>
-            <a
+          {/* DESKTOP NAV */}
+          <nav className="hidden items-center gap-8 text-sm md:flex">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-zinc-200 transition hover:text-white"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
               href="/contact"
-              className="inline-flex h-10 items-center justify-center rounded-full bg-white/10 px-4 font-semibold text-white hover:bg-white/20 transition"
+              className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-black shadow-sm transition hover:bg-zinc-100"
             >
-              START A PROJECT
-            </a>
+              Start a project
+            </Link>
           </nav>
+
+          {/* MOBILE MENU BUTTON */}
+          <button
+            type="button"
+            aria-label="Toggle navigation"
+            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-black/25 p-2 text-white md:hidden"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
+        </div>
+
+        {/* MOBILE MENU PANEL */}
+        <div
+          className={`md:hidden transition-[max-height,opacity] duration-250 ease-out ${
+            open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          } overflow-hidden`}
+        >
+          <div className="space-y-1 border-t border-white/10 bg-black/90 px-4 pb-4 pt-3 text-sm">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block rounded-lg px-2 py-2 text-zinc-200 hover:bg-white/5 hover:text-white"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              href="/contact"
+              className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-white px-4 py-2 text-xs font-semibold text-black hover:bg-zinc-100"
+              onClick={() => setOpen(false)}
+            >
+              Start a project
+            </Link>
+          </div>
         </div>
       </header>
 
-      <main className="pt-16 sm:pt-0">{children}</main>
-
-      {/* Footer (identical on every page) */}
-      <footer className="border-t border-white/10 bg-black">
-        <div className="mx-auto w-full max-w-screen-2xl px-6 py-10 sm:px-8">
-          <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-            <div className="flex items-center gap-3">
-              <LogoInline size={26} />
-              <div className="text-sm">
-                <div className="font-semibold">{BRAND}</div>
-                <div className="text-zinc-400">Modern websites, future-ready</div>
-              </div>
-            </div>
-            <nav className="flex flex-wrap items-center gap-5 text-sm">
-              <a href="/services" className="text-zinc-300 hover:text-white">Services</a>
-              <a href="/about" className="text-zinc-300 hover:text-white">About</a>
-              <a href="/process" className="text-zinc-300 hover:text-white">Process</a>
-              <a href="/pricing" className="text-zinc-300 hover:text-white">Pricing</a>
-              <a href="/faq" className="text-zinc-300 hover:text-white">FAQ</a>
-              <a href="/contact" className="text-zinc-300 hover:text-white">Contact</a>
-            </nav>
-          </div>
-          <div className="mt-6 text-xs text-zinc-500">
-            © {new Date().getFullYear()} {BRAND}. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      {/* MAIN CONTENT (padding-top to offset fixed header height) */}
+      <main className="pt-14">{children}</main>
     </div>
   );
 }
+
 
 
