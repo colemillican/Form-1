@@ -418,17 +418,14 @@ export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as Body;
 
-    const id = randomUUID();
-    const html = buildHtml(body);
+    // ⬇️ keep whatever logic you already have here:
+    // - maybe you call OpenAI to create a plan
+    // - then you call buildHtml(plan, body)
+    const html = buildHtml(body); // or your existing html variable
 
-    // write to /public/generated-sites
-    const dir = path.join(process.cwd(), "public", "generated-sites");
-    fs.mkdirSync(dir, { recursive: true });
-
-    const filePath = path.join(dir, `${id}.html`);
-    fs.writeFileSync(filePath, html, "utf-8");
-
-    return NextResponse.json({ id });
+    // ⛔ REMOVE the fs.writeFile + id stuff
+    // ✅ Just return the HTML directly
+    return NextResponse.json({ html });
   } catch (err) {
     console.error("generate-site error:", err);
     return NextResponse.json(
@@ -437,4 +434,5 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
 
