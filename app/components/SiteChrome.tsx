@@ -20,14 +20,20 @@ type SiteChromeProps = {
   children: React.ReactNode;
 };
 
+/**
+ * IMPORTANT CHANGE:
+ * These now point to real pages instead of #anchors on the home page.
+ * Make sure you have /services, /work, /process, /pricing, /faq, /contact pages.
+ * If you don’t have some of them yet, you can comment those out or add them later.
+ */
 const NAV_ITEMS = [
   { href: "/", label: "Home" },
-  { href: "#services", label: "Services" },
-  { href: "#work", label: "Work" },
-  { href: "#process", label: "Process" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
+  { href: "/services", label: "Services" },
+  { href: "/work", label: "Work" },
+  { href: "/process", label: "Process" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function SiteChrome({ children }: SiteChromeProps) {
@@ -55,7 +61,11 @@ export default function SiteChrome({ children }: SiteChromeProps) {
       >
         <div className="mx-auto flex h-14 max-w-screen-2xl items-center justify-between px-4 sm:px-6">
           {/* Logo mark only */}
-          <Link href="/" className="inline-flex items-center" aria-label="LocalLink Digital home">
+          <Link
+            href="/"
+            className="inline-flex items-center"
+            aria-label="LocalLink Digital home"
+          >
             <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-500 shadow-md">
               {/* Simple abstract 'link' glyph */}
               <div className="h-4 w-4 rounded-md border-2 border-white/90 border-b-transparent" />
