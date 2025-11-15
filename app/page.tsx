@@ -63,6 +63,8 @@ function HeroCarousel() {
           aria-hidden={i !== idx}
         />
       ))}
+      {/* Subtle darkening overlay for better text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/90" />
     </div>
   );
 }
@@ -127,7 +129,7 @@ export default function Page() {
               <G>Websites that perform.</G>
             </h1>
 
-            <p className="mt-5 text-[15px] leading-relaxed text-zinc-100 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
+            <p className="mt-5 text-[15px] leading-relaxed text-zinc-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
               We bring your story to life online — designing, building, and
               managing beautiful, high-performing websites that help local
               customers find you, trust you, and reach you.
