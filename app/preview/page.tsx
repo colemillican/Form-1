@@ -3,7 +3,6 @@
 import React, { useEffect, useState, FormEvent } from "react";
 
 type StyleVibe = "cinematic" | "warm" | "minimal" | "playful";
-
 type PreviewPhase = "form" | "loading" | "preview";
 
 type FormState = {
@@ -30,13 +29,13 @@ function LoadingScreen() {
   useEffect(() => {
     const id = setInterval(() => {
       setPhraseIndex((i) => (i + 1) % loadingPhrases.length);
-    }, 2500); // change phrase every 2.5s
+    }, 2500);
     return () => clearInterval(id);
   }, []);
 
   return (
     <main className="relative flex min-h-[calc(100vh-56px)] items-center justify-center overflow-hidden bg-black">
-      {/* Gradient + subtle motion background */}
+      {/* Gradient background */}
       <div
         className="pointer-events-none absolute inset-0 opacity-80"
         style={{
@@ -46,10 +45,9 @@ function LoadingScreen() {
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.03),transparent_55%)] animate-pulse" />
 
-      {/* Shooting star */}
+      {/* Optional shooting star if you have .shooting-star in globals.css */}
       <div className="pointer-events-none absolute -top-10 left-[-20%] h-px w-[40%] origin-left rounded-full bg-gradient-to-r from-transparent via-white to-transparent shooting-star" />
 
-      {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center text-white">
         <div className="mb-4 h-9 w-9 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-500 shadow-[0_0_35px_rgba(16,185,129,0.65)]" />
         <p className="text-xs uppercase tracking-[0.25em] text-emerald-300/80">
@@ -62,7 +60,6 @@ function LoadingScreen() {
           {loadingPhrases[phraseIndex]}
         </p>
 
-        {/* Simple spinner */}
         <div className="mt-8 h-8 w-8 animate-spin rounded-full border-2 border-emerald-400/40 border-t-emerald-300" />
       </div>
     </main>
@@ -71,7 +68,7 @@ function LoadingScreen() {
 
 export default function PreviewPage() {
   const [phase, setPhase] = useState<PreviewPhase>("form");
-  const [siteId, setSiteId] = useState<string | null>(null);
+  const [previewHtml, setPreviewHtml] = useState<string | null>(null);
 
   const [form, setForm] = useState<FormState>({
     businessName: "",
@@ -85,7 +82,9 @@ export default function PreviewPage() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -97,7 +96,8 @@ export default function PreviewPage() {
       industry: "Strength & conditioning gym",
       location: "Birmingham, AL",
       styleVibe: "cinematic",
-      primaryGoal: "Convert visitors into trial members and personal training clients.",
+      primaryGoal:
+        "Convert visitors into trial members and personal training clients.",
       idealCustomer:
         "Busy professionals and athletes 20–40 who care about serious training, not fads.",
       keyOffers:
@@ -111,17 +111,16 @@ export default function PreviewPage() {
     e.preventDefault();
 
     setPhase("loading");
-    setSiteId(null);
+    setPreviewHtml(null);
 
     try {
-      // minimum 10 second loading screen
       const fetchPromise = fetch("/api/generate-site", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
-      const delay = new Promise((resolve) => setTimeout(resolve, 10000));
+      const delay = new Promise((resolve) => setTimeout(resolve, 10000)); // 10s cinematic load
 
       const [res] = (await Promise.all([
         fetchPromise,
@@ -132,8 +131,8 @@ export default function PreviewPage() {
         throw new Error("Failed to generate site");
       }
 
-      const data = (await res.json()) as { id: string };
-      setSiteId(data.id);
+      const data = (await res.json()) as { html: string };
+      setPreviewHtml(data.html);
       setPhase("preview");
     } catch (err) {
       console.error(err);
@@ -142,7 +141,6 @@ export default function PreviewPage() {
     }
   };
 
-  // Simple layout wrapper shared by form + preview
   const PageShell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <div className="min-h-screen bg-black text-white">
       <header className="flex h-14 items-center justify-between border-b border-white/10 bg-black/80 px-5 backdrop-blur">
@@ -162,7 +160,6 @@ export default function PreviewPage() {
     </div>
   );
 
-  /* ------------ Phase switch ------------ */
   if (phase === "loading") {
     return (
       <PageShell>
@@ -171,7 +168,7 @@ export default function PreviewPage() {
     );
   }
 
-  if (phase === "preview" && siteId) {
+  if (phase === "preview" && previewHtml) {
     return (
       <PageShell>
         <main className="mx-auto flex min-h-[calc(100vh-56px)] max-w-6xl flex-col gap-6 px-5 py-10 lg:px-8">
@@ -183,18 +180,16 @@ export default function PreviewPage() {
               Here’s a first pass at your new homepage.
             </h1>
             <p className="mt-3 max-w-2xl text-sm text-zinc-300">
-              This is a generated draft based on your answers. In a full build, we’d
-              refine the copy, imagery, and structure together and wire it up as a
-              complete site.
+              This is a generated draft based on your answers. In a full build,
+              we’d refine the copy, imagery, and structure together and wire it
+              up as a complete site.
             </p>
           </div>
 
           <section className="flex-1">
-            <iframe
-              key={siteId}
-              src={`/generated-sites/${siteId}.html`}
-              className="h-[75vh] w-full rounded-2xl border border-white/10 bg-black"
-              loading="lazy"
+            <div
+              className="h-[75vh] w-full overflow-auto rounded-2xl border border-white/10 bg-black"
+              dangerouslySetInnerHTML={{ __html: previewHtml }}
             />
           </section>
 
@@ -204,7 +199,9 @@ export default function PreviewPage() {
             </h2>
             <p className="mt-2">
               We used your answers about{" "}
-              <span className="font-medium">{form.businessName || "your business"}</span>{" "}
+              <span className="font-medium">
+                {form.businessName || "your business"}
+              </span>{" "}
               to set the tone, structure, and messaging. On a real project, this
               preview becomes the starting point for a full discovery call and
               refinement process before launch.
@@ -223,7 +220,7 @@ export default function PreviewPage() {
     );
   }
 
-  // Default: form phase
+  // Form phase
   return (
     <PageShell>
       <main className="mx-auto flex min-h-[calc(100vh-56px)] max-w-4xl flex-col px-5 py-10 lg:px-8">
@@ -235,8 +232,9 @@ export default function PreviewPage() {
             Tell us about your business. We’ll sketch your homepage.
           </h1>
           <p className="mt-3 max-w-2xl text-sm text-zinc-300">
-            Answer a few focused questions. We’ll turn your answers into a homepage
-            draft using the same design system we use for full projects.
+            Answer a few focused questions. We’ll turn your answers into a
+            homepage draft using the same design system we use for full
+            projects.
           </p>
         </header>
 
