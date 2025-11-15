@@ -138,7 +138,7 @@ export default function Page() {
             {/* Centered CTA */}
             <div className="mt-8 flex justify-center">
               <a
-                href="/contact"
+                href="/preview"
                 className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-emerald-300 px-12 py-4 text-[16px] font-semibold text-black shadow-[0_18px_45px_rgba(16,185,129,0.45)] transition hover:from-emerald-300 hover:to-emerald-200 hover:shadow-[0_18px_40px_rgba(16,185,129,0.55)]"
               >
                 Get my free website outline
@@ -197,7 +197,7 @@ export default function Page() {
               Recent launches
             </h3>
             <a
-              href="/contact"
+              href="/preview"
               className="hidden items-center text-sm font-semibold text-zinc-300 hover:text-white sm:inline-flex"
             >
               Request a preview
@@ -334,9 +334,12 @@ export default function Page() {
               className="min-h-[120px] w-full rounded-xl border border-white/15 bg-white/5 p-3 text-[16px] placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60"
               placeholder="What do you do? What’s the main goal of this site?"
             />
-            <button className="h-11 w-full rounded-full bg-white font-semibold text-black transition hover:bg-zinc-200">
+            <a
+              href="/preview"
+              className="inline-flex h-11 w-full items-center justify-center rounded-full bg-white font-semibold text-black transition hover:bg-zinc-200"
+            >
               Request preview
-            </button>
+            </a>
             <p className="text-xs text-zinc-500">
               By submitting, you agree to be contacted about your project.
             </p>
@@ -346,13 +349,3 @@ export default function Page() {
     </SiteChrome>
   );
 }
-
-
-
-
-
-
-
-
-
-
