@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charSet="utf-8" />
+  <title>apex performance gym – Homepage Draft</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: #020617;
+      color: #f9fafb;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, rgba(34,197,94,0.08), transparent 55%);
+      color: #f9fafb;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: rgba(0,0,0,0.78);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(148,163,184,0.35);
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .nav-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0%, #4ade80, #22c55e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #020617;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .nav-cta {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: #f9fafb;
+      color: #020617;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 24px 72px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to bottom, rgba(15,23,42,0.90), rgba(15,23,42,0.94)),
+        url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.98;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 960px;
+      text-align: center;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-size: clamp(34px, 5vw, 44px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(90deg, #22c55e, #34d399, #38bdf8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #e5e7eb;
+      max-width: 640px;
+      margin: 0 auto 20px;
+    }
+
+    .hero-meta {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .hero-cta-primary {
+      padding: 11px 22px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: radial-gradient(circle at 0 0, #4ade80, #22c55e);
+      color: #020617;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 18px 45px rgba(34,197,94,0.55);
+    }
+
+    .hero-cta-secondary {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .hero-footnotes {
+      margin-top: 18px;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .section {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    .section-heading-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,0.40);
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
+      padding: 16px 16px 14px;
+    }
+
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #a1a1aa;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-body {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #e5e7eb;
+    }
+
+    .footer {
+      padding: 32px 24px 40px;
+      border-top: 1px solid rgba(148,163,184,0.35);
+      font-size: 12px;
+      color: #9ca3af;
+      text-align: center;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 0 16px; }
+      .hero { padding: 56px 16px 64px; }
+      .section { padding: 40px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="nav">
+      <div class="nav-logo">
+        <div class="nav-mark">a</div>
+        <span>apex performance gym</span>
+      </div>
+      <button class="nav-cta">Book a free call</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-inner">
+          <div class="hero-label">STRENGTH TRAINING FOR AND PERFORMANCE CENTER</div>
+          <h1 class="hero-title">
+            <span class="hero-gradient">apex performance gym</span><br/>
+            Increase memberships, book more consultations, 
+          </h1>
+          <p class="hero-sub">
+            A modern, high-performing website for apex performance gym, built to help people in Auburn find you, trust you, and take the next step.
+          </p>
+          <p class="hero-meta">Serving Auburn • strength training for and performance center</p>
+          <div class="hero-cta-row">
+            <button class="hero-cta-primary">Request my free website outline</button>
+            <button class="hero-cta-secondary">See what we offer</button>
+          </div>
+          <div class="hero-footnotes">
+            No obligation. Just a clear plan for how your site can work harder for you.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading-row">
+          <h2 class="section-title">What your homepage can highlight</h2>
+          <span class="section-tag">Overview</span>
+        </div>
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card-label">Hero</div>
+            <h3 class="card-title">A bold promise above the fold</h3>
+            <p class="card-body">
+              Lead with a clear, confident headline and subheading that state who you help, what you do, and why it matters—backed by a strong call-to-action.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-label">Services</div>
+            <h3 class="card-title">Simple breakdown of your key offers</h3>
+            <p class="card-body">
+              3–4 concise service tiles that make it easy for visitors to understand how you can help and what to explore next.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-label">Trust</div>
+            <h3 class="card-title">Proof that you deliver</h3>
+            <p class="card-body">
+              Testimonials, logos, or short case studies that show real results and build confidence before someone reaches out.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-label">Action</div>
+            <h3 class="card-title">Clear ways to get in touch</h3>
+            <p class="card-body">
+              A simple contact or booking section that makes it obvious how to call, fill out a form, or request a quote—no hunting around.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading-row">
+          <h2 class="section-title">Why this layout works for apex performance gym</h2>
+          <span class="section-tag">Strategy</span>
+        </div>
+        <p class="card-body">
+          This draft is designed to feel premium, focused, and trustworthy—without overwhelming visitors. It keeps your homepage focused on the story that matters most:
+          how apex performance gym helps people in Auburn through strength training for and performance center.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Draft homepage concept for apex performance gym. In a full project we’d refine the visuals, copy, and structure together to match your brand perfectly.
+    </footer>
+  </div>
+</body>
+</html>

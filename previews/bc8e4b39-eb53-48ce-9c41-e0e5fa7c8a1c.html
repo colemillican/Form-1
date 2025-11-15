@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charSet="utf-8" />
+  <title>Apex Performance Gym – Preview Homepage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    :root {
+      --bg: #020617;
+      --surface: #020617;
+      --surface-elevated: #020617;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.08);
+      --accent-soft-2: rgba(34, 197, 94, 0.12);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --hero-light: rgba(15, 23, 42, 0.85);
+      --hero-border: rgba(148, 163, 184, 0.28);
+    }
+
+    body.theme-cinematic {
+      --bg: #020617;
+      --surface: radial-gradient(circle at top, #0f172a 0, #020617 55%);
+      --surface-elevated: rgba(15, 23, 42, 0.95);
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.1);
+      --accent-soft-2: rgba(34, 197, 94, 0.16);
+      --hero-light: rgba(15, 23, 42, 0.88);
+      --hero-border: rgba(56, 189, 248, 0.25);
+    }
+
+    body.theme-warm {
+      --bg: #0b1120;
+      --surface: radial-gradient(circle at top, #083344 0, #020617 55%);
+      --surface-elevated: rgba(15, 23, 42, 0.94);
+      --accent: #fbbf24;
+      --accent-soft: rgba(251, 191, 36, 0.13);
+      --accent-soft-2: rgba(251, 191, 36, 0.18);
+      --hero-light: rgba(15, 23, 42, 0.9);
+      --hero-border: rgba(251, 191, 36, 0.28);
+    }
+
+    body.theme-clean {
+      --bg: #f3f4f6;
+      --surface: radial-gradient(circle at top, #e5e7eb 0, #f9fafb 55%);
+      --surface-elevated: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.06);
+      --accent-soft-2: rgba(37, 99, 235, 0.1);
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --hero-light: #ffffff;
+      --hero-border: rgba(148, 163, 184, 0.5);
+    }
+
+    body.theme-minimal {
+      --bg: #050816;
+      --surface: radial-gradient(circle at top, #0b1220 0, #020617 60%);
+      --surface-elevated: rgba(15, 23, 42, 0.96);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.11);
+      --accent-soft-2: rgba(56, 189, 248, 0.16);
+      --hero-light: rgba(15, 23, 42, 0.93);
+      --hero-border: rgba(148, 163, 184, 0.3);
+    }
+
+    .page {
+      min-height: 100vh;
+      background: var(--surface);
+      color: var(--text-main);
+    }
+
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 6px 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .brand-mark {
+      height: 28px;
+      width: 28px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent), #4ade80);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 16px 35px rgba(0,0,0,0.55);
+    }
+
+    .brand-glyph {
+      height: 14px;
+      width: 14px;
+      border-radius: 6px;
+      border: 2px solid white;
+      border-bottom-color: transparent;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .nav a {
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.18s ease-out;
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent-soft-2);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-soft-2);
+    }
+
+    .hero {
+      position: relative;
+      margin-top: 18px;
+      border-radius: 26px;
+      padding: 28px 22px 30px;
+      background: var(--hero-light);
+      border: 1px solid var(--hero-border);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+      overflow: hidden;
+    }
+
+    .hero-glow-1,
+    .hero-glow-2 {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(50px);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-glow-1 {
+      top: -80px;
+      left: -60px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, var(--accent-soft-2), transparent 60%);
+    }
+
+    .hero-glow-2 {
+      bottom: -120px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.28), transparent 60%);
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.25fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .hero-meta {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-title {
+      margin-top: 16px;
+      font-size: 32px;
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-subtitle {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 32rem;
+    }
+
+    .hero-ctas {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cta-primary {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--accent);
+      color: #020617;
+      box-shadow: 0 18px 50px rgba(16, 185, 129, 0.55);
+      cursor: pointer;
+    }
+
+    .cta-secondary {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 12px;
+      font-weight: 500;
+      background: transparent;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .goals-line {
+      margin-top: 16px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-right {
+      position: relative;
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.9), rgba(15,23,42,0.96));
+      padding: 14px 14px 12px;
+      overflow: hidden;
+    }
+
+    body.theme-clean .hero-right {
+      background: radial-gradient(circle at top, #e5e7eb, #f9fafb);
+    }
+
+    .hero-screen {
+      border-radius: 18px;
+      background: linear-gradient(to bottom right, rgba(15,23,42,0.95), rgba(15,23,42,0.98));
+      padding: 16px 16px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.theme-clean .hero-screen {
+      background: white;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.18);
+    }
+
+    .hero-screen-badge {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .hero-screen-title {
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hero-screen-copy {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #9ca3af;
+      max-width: 18rem;
+    }
+
+    .hero-screen-pill {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      color: #d1fae5;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    body.theme-clean .hero-screen-pill {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-color: rgba(37, 99, 235, 0.55);
+    }
+
+    .hero-screen-cta {
+      margin-top: 18px;
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 10px;
+      color: #e5e7eb;
+    }
+
+    body.theme-clean .hero-screen-cta {
+      color: #111827;
+    }
+
+    .sections-wrap {
+      margin-top: 32px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .section {
+      border-radius: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: linear-gradient(
+        to bottom right,
+        rgba(15,23,42,0.96),
+        rgba(15,23,42,0.98)
+      );
+    }
+
+    body.theme-clean .section {
+      background: var(--surface-elevated);
+      border-color: rgba(209, 213, 219, 0.8);
+    }
+
+    .section-inner {
+      padding: 18px 18px 16px;
+    }
+
+    .section h2 {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .section-summary {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .section-list {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .section-list li {
+      display: flex;
+      font-size: 12px;
+      color: #d4d4d8;
+    }
+
+    .dot {
+      margin-top: 6px;
+      margin-right: 8px;
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    body.theme-clean .section-list li {
+      color: #374151;
+    }
+
+    body.theme-clean .dot {
+      background: var(--accent);
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+  </style>
+</head>
+<body class="theme-cinematic">
+  <div class="page">
+    <div class="shell">
+      <header class="site-header">
+        <div class="brand">
+          <div class="brand-mark">
+            <div class="brand-glyph"></div>
+          </div>
+          <span>Apex Performance Gym</span>
+        </div>
+        <nav class="nav">
+          <a href="#">Home</a>
+          <a href="#">Services</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <span class="nav-cta">Preview build</span>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-glow-1"></div>
+          <div class="hero-glow-2"></div>
+          <div class="hero-inner">
+            <div>
+              <p class="hero-label">CINEMATIC PREVIEW</p>
+              <p class="hero-meta">Auburn, AL · Strength training gym & athletic performance</p>
+              <h1 class="hero-title">Unleash Your Peak Performance Today</h1>
+              <p class="hero-subtitle">Auburn’s premier strength training gym for athletes, teens, and adults ready to transform their fitness.</p>
+              <div class="hero-ctas">
+                <button class="cta-primary">Book a Free Session</button>
+                <button class="cta-secondary">View Membership Options</button>
+              </div>
+              <p class="goals-line">Primary goal: Increase memberships and personal training leads</p>
+            </div>
+
+            <aside class="hero-right" aria-hidden="true">
+              <div class="hero-screen">
+                <p class="hero-screen-badge">ABOVE-THE-FOLD SNAPSHOT</p>
+                <p class="hero-screen-title">Apex Performance Gym</p>
+                <p class="hero-screen-copy">
+                  A first-pass homepage preview built from your answers. In a full engagement,
+                  this becomes a fully wired, production-ready site.
+                </p>
+                <div class="hero-screen-pill">
+                  <span>●</span>
+                  <span>Made for: Strength training gym & athletic performance</span>
+                </div>
+                <div class="hero-screen-cta">
+                  This is only ~10% of the real build.
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <div class="sections-wrap">
+          
+      <section class="section">
+        <div class="section-inner">
+          <h2>Our Services</h2>
+          <p class="section-summary">Tailored strength and athletic training programs designed to push your limits and deliver results.</p>
+          <ul class="section-list">
+              <li>
+                    <span class="dot"></span>
+                    <span>Personalized strength training</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>Athletic performance coaching</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>Group fitness classes</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>Nutrition and recovery guidance</span>
+                  </li>
+            </ul>
+        </div>
+      </section>
+    
+
+      <section class="section">
+        <div class="section-inner">
+          <h2>Why Choose Apex Performance Gym</h2>
+          <p class="section-summary">Experience a bold, high-energy environment with expert coaches committed to your success.</p>
+          <ul class="section-list">
+              <li>
+                    <span class="dot"></span>
+                    <span>State-of-the-art equipment</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>Certified personal trainers</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>Cinematic, high-contrast gym atmosphere</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>Supportive community of motivated athletes</span>
+                  </li>
+            </ul>
+        </div>
+      </section>
+    
+
+      <section class="section">
+        <div class="section-inner">
+          <h2>How It Works</h2>
+          <p class="section-summary">Get started quickly with a free assessment and customized training plan designed for your goals.</p>
+          <ul class="section-list">
+              <li>
+                    <span class="dot"></span>
+                    <span>Free initial fitness evaluation</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>Custom workout plans</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>Regular progress tracking</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>Flexible membership options</span>
+                  </li>
+            </ul>
+        </div>
+      </section>
+    
+
+      <section class="section">
+        <div class="section-inner">
+          <h2>What Our Members Say</h2>
+          <p class="section-summary">Real stories from athletes and fitness enthusiasts who have transformed their lives at Apex.</p>
+          <ul class="section-list">
+              <li>
+                    <span class="dot"></span>
+                    <span>"Best gym environment for serious training!" – Jordan A.</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>"I gained strength and confidence in weeks." – Megan L.</span>
+                  </li><li>
+                    <span class="dot"></span>
+                    <span>"Coaches push you to be your best." – Tyler S.</span>
+                  </li>
+            </ul>
+        </div>
+      </section>
+    
+        </div>
+
+        <p class="footer-note">
+          This is a draft preview. In a full project, we'd refine copy, visuals, and structure
+          to match your brand and offers.
+        </p>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

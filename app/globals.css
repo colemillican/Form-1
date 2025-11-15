@@ -1,3 +1,21 @@
 ﻿@import "tailwindcss";
 
 html, body { height: 100%; }
+ 
+@keyframes shooting-star {
+  0% {
+    transform: translateX(-10%) translateY(0) scaleX(0.7);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(220%) translateY(40px) scaleX(1);
+    opacity: 0;
+  }
+}
+
+.shooting-star {
+  animation: shooting-star 3.2s ease-in-out infinite;
+}
